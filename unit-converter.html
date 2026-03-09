@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Unit Converter</title>
+</head>
+
+<body>
+
+<h1>Unit Converter</h1>
+
+<input type="number" id="value" placeholder="Enter value">
+
+<br><br>
+
+<select id="conversion">
+<option value="kg-lb">Kilograms → Pounds</option>
+<option value="lb-kg">Pounds → Kilograms</option>
+<option value="m-ft">Meters → Feet</option>
+<option value="ft-m">Feet → Meters</option>
+<option value="c-f">Celsius → Fahrenheit</option>
+<option value="f-c">Fahrenheit → Celsius</option>
+</select>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+function convert(){
+
+let value=parseFloat(document.getElementById("value").value);
+let type=document.getElementById("conversion").value;
+let result=0;
+
+if(type=="kg-lb") result=value*2.20462;
+if(type=="lb-kg") result=value/2.20462;
+if(type=="m-ft") result=value*3.28084;
+if(type=="ft-m") result=value/3.28084;
+if(type=="c-f") result=(value*9/5)+32;
+if(type=="f-c") result=(value-32)*5/9;
+
+document.getElementById("result").innerHTML="Result: "+result;
+
+}
+
+</script>
+
+</body>
+</html>
