@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>WEBP to PNG Converter - FastTools</title>
+
+<meta name="description" content="Convert WEBP images to PNG online for free using FastTools.">
+
+</head>
+
+<body>
+
+<h1>WEBP to PNG Converter</h1>
+
+<p>Upload a WEBP image and convert it to PNG instantly.</p>
+
+<input type="file" id="upload">
+
+<br><br>
+
+<button onclick="convert()">Convert to PNG</button>
+
+<br><br>
+
+<a id="download" style="display:none;">Download PNG</a>
+
+<script>
+
+function convert(){
+
+let file=document.getElementById("upload").files[0];
+
+let img=new Image();
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+img.src=e.target.result;
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas");
+
+canvas.width=img.width;
+canvas.height=img.height;
+
+let ctx=canvas.getContext("2d");
+ctx.drawImage(img,0,0);
+
+let png=canvas.toDataURL("image/png");
+
+let link=document.getElementById("download");
+link.href=png;
+link.download="converted.png";
+link.innerHTML="Download PNG";
+link.style.display="block";
+
+}
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
