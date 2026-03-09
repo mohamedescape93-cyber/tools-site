@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Converter</title>
+</head>
+
+<body>
+
+<h1>Image Converter</h1>
+
+<input type="file" id="upload">
+
+<br><br>
+
+<select id="format">
+<option value="image/jpeg">Convert to JPG</option>
+<option value="image/png">Convert to PNG</option>
+</select>
+
+<br><br>
+
+<button onclick="convertImage()">Convert</button>
+
+<br><br>
+
+<a id="download" style="display:none;">Download Image</a>
+
+<script>
+
+function convertImage(){
+
+let file=document.getElementById("upload").files[0];
+let format=document.getElementById("format").value;
+
+let img=new Image();
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+img.src=e.target.result;
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas");
+canvas.width=img.width;
+canvas.height=img.height;
+
+let ctx=canvas.getContext("2d");
+ctx.drawImage(img,0,0);
+
+let converted=canvas.toDataURL(format);
+
+let link=document.getElementById("download");
+link.href=converted;
+link.download="converted-image";
+link.innerHTML="Download Converted Image";
+link.style.display="block";
+
+}
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
