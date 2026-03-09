@@ -29,6 +29,33 @@ margin:10px;
 button{
 padding:10px 20px;
 margin-top:20px;
+cursor:pointer;
+}
+
+#downloadMenu{
+display:none;
+position:relative;
+margin-top:20px;
+}
+
+#menu{
+display:none;
+background:white;
+border:1px solid #ccc;
+width:200px;
+margin:auto;
+}
+
+#menu button{
+display:block;
+width:100%;
+border:none;
+background:white;
+padding:10px;
+}
+
+#menu button:hover{
+background:#eee;
 }
 
 </style>
@@ -59,27 +86,38 @@ margin-top:20px;
 
 <br><br>
 
-<div id="downloads"></div>
+<div id="downloadMenu">
+
+<button onclick="toggleMenu()">Download ▼</button>
+
+<div id="menu">
+<button onclick="downloadImages()">Download Images Individually</button>
+<button onclick="downloadZip()">Download as ZIP</button>
+</div>
+
+</div>
 
 <script>
 
-let dropArea = document.getElementById("drop-area");
-let fileInput = document.getElementById("upload");
-let preview = document.getElementById("preview");
+let dropArea=document.getElementById("drop-area");
+let fileInput=document.getElementById("upload");
+let preview=document.getElementById("preview");
 
-dropArea.onclick = () => fileInput.click();
+let convertedImages=[];
 
-dropArea.addEventListener("dragover", e=>{
+dropArea.onclick=()=>fileInput.click();
+
+dropArea.addEventListener("dragover",e=>{
 e.preventDefault();
 });
 
-dropArea.addEventListener("drop", e=>{
+dropArea.addEventListener("drop",e=>{
 e.preventDefault();
-fileInput.files = e.dataTransfer.files;
+fileInput.files=e.dataTransfer.files;
 showPreview();
 });
 
-fileInput.addEventListener("change", showPreview);
+fileInput.addEventListener("change",showPreview);
 
 function showPreview(){
 
@@ -99,11 +137,10 @@ preview.appendChild(img);
 
 function convertImage(){
 
+convertedImages=[];
+
 let files=fileInput.files;
 let format=document.getElementById("format").value;
-
-let downloads=document.getElementById("downloads");
-downloads.innerHTML="";
 
 for(let i=0;i<files.length;i++){
 
@@ -128,14 +165,10 @@ let converted=canvas.toDataURL(format);
 
 let extension=format==="image/jpeg"?".jpg":".png";
 
-let link=document.createElement("a");
-
-link.href=converted;
-link.download="converted_"+(i+1)+extension;
-link.innerHTML="Download Image "+(i+1);
-
-downloads.appendChild(link);
-downloads.appendChild(document.createElement("br"));
+convertedImages.push({
+data:converted,
+name:"converted_"+(i+1)+extension
+});
 
 }
 
@@ -144,6 +177,35 @@ downloads.appendChild(document.createElement("br"));
 reader.readAsDataURL(file);
 
 }
+
+document.getElementById("downloadMenu").style.display="block";
+
+}
+
+function toggleMenu(){
+
+let menu=document.getElementById("menu");
+
+menu.style.display = menu.style.display==="block" ? "none" : "block";
+
+}
+
+function downloadImages(){
+
+for(let i=0;i<convertedImages.length;i++){
+
+let link=document.createElement("a");
+link.href=convertedImages[i].data;
+link.download=convertedImages[i].name;
+link.click();
+
+}
+
+}
+
+function downloadZip(){
+
+alert("ZIP download will be implemented next.");
 
 }
 
