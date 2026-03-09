@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>PNG to JPG Converter - FastTools</title>
+
+<meta name="description" content="Convert PNG images to JPG online for free using FastTools. Fast and easy PNG to JPG converter.">
+
+</head>
+
+<body>
+
+<h1>PNG to JPG Converter</h1>
+
+<p>Upload a PNG image and convert it to JPG instantly.</p>
+
+<input type="file" id="upload">
+
+<br><br>
+
+<button onclick="convert()">Convert to JPG</button>
+
+<br><br>
+
+<a id="download" style="display:none;">Download JPG</a>
+
+<script>
+
+function convert(){
+
+let file=document.getElementById("upload").files[0];
+
+let img=new Image();
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+img.src=e.target.result;
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas");
+
+canvas.width=img.width;
+canvas.height=img.height;
+
+let ctx=canvas.getContext("2d");
+ctx.drawImage(img,0,0);
+
+let jpg=canvas.toDataURL("image/jpeg");
+
+let link=document.getElementById("download");
+link.href=jpg;
+link.download="converted.jpg";
+link.innerHTML="Download JPG";
+link.style.display="block";
+
+}
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
