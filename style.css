@@ -223,18 +223,21 @@ background:#1f2e3d;
 
 /* QR TOOL */
 
+/* QR CODE FIX */
+
 #qrcode-container{
 margin-top:25px;
 display:flex;
 justify-content:center;
+align-items:center;
 }
 
-#qrcode{
-padding:10px;
-background:white;
-border-radius:6px;
+#qrcode canvas{
+display:block;
+margin:auto;
 }
 
-#downloadBtn{
-margin-top:20px;
+#qrcode img{
+display:block;
+margin:auto;
 }
