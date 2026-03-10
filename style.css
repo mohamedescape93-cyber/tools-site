@@ -117,7 +117,14 @@ border-radius:6px;
 font-size:15px;
 cursor:pointer;
 }
-
+.tool-container{
+background:white;
+max-width:700px;
+margin:60px auto;
+padding:40px;
+border-radius:10px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
 button:hover{
 background:#34495e;
 }
