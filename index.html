@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <link rel="stylesheet" href="style.css">
+
 <title>FastTools - Free Online Tools</title>
 
 <meta name="description" content="FastTools provides free online tools including QR generator, password generator, word counter, image converter and more.">
@@ -12,38 +15,43 @@ body{
 font-family:Arial;
 background:#f4f6f9;
 margin:0;
-padding:0;
+padding:40px;
+text-align:center;
 }
 
 header{
 background:#2c3e50;
 color:white;
-padding:20px;
-text-align:center;
+padding:30px 20px;
+margin:-40px -40px 40px -40px;
 }
 
-.container{
-width:90%;
-margin:auto;
-margin-top:30px;
+.tools-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
+max-width:1200px;
+margin:auto;
 }
 
 .tool-card{
 background:white;
-padding:20px;
-border-radius:8px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
-text-align:center;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+text-decoration:none;
+color:#2c3e50;
+transition:all 0.25s ease;
+display:block;
 }
 
-.tool-card a{
-text-decoration:none;
-font-weight:bold;
-color:#2c3e50;
-font-size:18px;
+.tool-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+.tool-card h3{
+margin-top:0;
 }
 
 .tool-card p{
@@ -51,9 +59,16 @@ font-size:14px;
 color:#555;
 }
 
+.description{
+max-width:800px;
+margin:50px auto;
+font-size:16px;
+color:#444;
+line-height:1.6;
+}
+
 footer{
 margin-top:40px;
-text-align:center;
 padding:20px;
 background:#2c3e50;
 color:white;
@@ -70,59 +85,70 @@ color:white;
 <p>Free Online Converters & Tools</p>
 </header>
 
-<div class="container">
 
-<div class="tool-card">
-<a href="qr-generator.html">QR Code Generator</a>
+<div class="tools-grid">
+
+<a class="tool-card" href="qr-generator.html">
+<h3>QR Code Generator</h3>
 <p>Create QR codes instantly.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="password-generator.html">Password Generator</a>
+<a class="tool-card" href="password-generator.html">
+<h3>Password Generator</h3>
 <p>Generate strong passwords.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="word-counter.html">Word Counter</a>
+<a class="tool-card" href="word-counter.html">
+<h3>Word Counter</h3>
 <p>Count words and characters.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="text-formatter.html">Text Formatter</a>
+<a class="tool-card" href="text-formatter.html">
+<h3>Text Formatter</h3>
 <p>Uppercase, lowercase and more.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="unit-converter.html">Unit Converter</a>
+<a class="tool-card" href="unit-converter.html">
+<h3>Unit Converter</h3>
 <p>Convert units instantly.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="image-converter.html">Image Converter</a>
+<a class="tool-card" href="image-converter.html">
+<h3>Image Converter</h3>
 <p>Convert PNG and JPG images.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="link-shortener.html">Link Shortener</a>
+<a class="tool-card" href="link-shortener.html">
+<h3>Link Shortener</h3>
 <p>Shorten long URLs easily.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="png-to-jpg.html">PNG to JPG</a>
+<a class="tool-card" href="png-to-jpg.html">
+<h3>PNG to JPG</h3>
 <p>Convert PNG images to JPG.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="jpg-to-png.html">JPG to PNG</a>
+<a class="tool-card" href="jpg-to-png.html">
+<h3>JPG to PNG</h3>
 <p>Convert JPG images to PNG.</p>
-</div>
+</a>
 
-<div class="tool-card">
-<a href="webp-to-png.html">WEBP to PNG</a>
+<a class="tool-card" href="webp-to-png.html">
+<h3>WEBP to PNG</h3>
 <p>Convert WEBP images to PNG.</p>
-</div>
+</a>
 
 </div>
+
+
+<div class="description">
+<p>
+FastTools provides free online utilities including image converters, QR generators, word counters,
+password generators, link shorteners, and text formatting tools. All tools run directly in your
+browser with no downloads required, making it fast and easy to complete everyday tasks online.
+</p>
+</div>
+
 
 <footer>
 <p>© 2026 FastTools</p>
