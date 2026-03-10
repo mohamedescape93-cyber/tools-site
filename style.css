@@ -99,10 +99,13 @@ margin-top:20px;
 /* INPUTS */
 
 input{
-padding:10px;
+width:100%;
+max-width:500px;
+padding:12px;
 font-size:16px;
 border-radius:6px;
 border:1px solid #ccc;
+margin-top:15px;
 }
 
 /* BUTTON */
