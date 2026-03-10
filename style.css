@@ -6,6 +6,51 @@ margin:0;
 padding:40px;
 }
 
+/* HEADER */
+header{
+background:#2c3e50;
+color:white;
+padding:30px 20px;
+margin:-40px -40px 40px -40px;
+}
+
+/* TOOL GRID */
+.tools-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+margin-top:40px;
+}
+
+/* TOOL CARDS */
+.tool-card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+text-decoration:none;
+color:#2c3e50;
+transition:all 0.25s ease;
+display:block;
+}
+
+.tool-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+.tool-card h3{
+margin-top:0;
+}
+
+.tool-card p{
+font-size:14px;
+color:#555;
+}
+
+/* DROP AREA (IMAGE TOOLS) */
 #drop-area{
 border:2px dashed #2c3e50;
 padding:40px;
@@ -15,21 +60,18 @@ background:white;
 cursor:pointer;
 }
 
+/* IMAGE PREVIEW */
 #preview img{
 width:100px;
 margin:10px;
 }
 
-button{
-padding:10px 20px;
-margin-top:20px;
-cursor:pointer;
-}
-
+/* HEADINGS */
 h1{
 margin-bottom:30px;
 }
 
+/* TEXTAREA */
 textarea{
 width:80%;
 max-width:600px;
@@ -40,18 +82,16 @@ border-radius:6px;
 border:1px solid #ccc;
 }
 
+/* INPUTS */
 input{
 padding:10px;
 font-size:16px;
 margin-top:10px;
+border-radius:6px;
+border:1px solid #ccc;
 }
-.back-link{
-display:inline-block;
-margin-bottom:20px;
-text-decoration:none;
-color:#2c3e50;
-font-weight:bold;
-}
+
+/* BUTTONS */
 button{
 padding:10px 20px;
 margin-top:20px;
@@ -67,30 +107,32 @@ button:hover{
 background:#34495e;
 }
 
-button:hover{
-background:#34495e;
-}
-
-.tools-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-max-width:1200px;
-margin:auto;
-margin-top:40px;
-}
-
-.tool-card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+/* BACK LINK */
+.back-link{
+display:inline-block;
+margin-bottom:20px;
 text-decoration:none;
 color:#2c3e50;
-transition:all 0.25s ease;
+font-weight:bold;
 }
 
-.tool-card:hover{
-transform:translateY(-6px);
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
+/* DESCRIPTION SECTION (homepage SEO) */
+.description{
+max-width:800px;
+margin:50px auto;
+font-size:16px;
+color:#444;
+line-height:1.6;
+}
+
+/* FOOTER */
+footer{
+margin-top:40px;
+padding:20px;
+background:#2c3e50;
+color:white;
+}
+
+a{
+color:inherit;
 }
