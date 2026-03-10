@@ -2,33 +2,41 @@
 <html>
 
 <head>
+
 <title>Link Shortener - FastTools</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
+
 
 <header class="site-header">
 <a href="index.html" class="logo">FastTools</a>
 </header>
 
+
 <a href="index.html" class="back-home">← Back to FastTools</a>
+
+
+<div class="tool-container">
 
 <h1>Link Shortener</h1>
 
 <input type="text" id="url" placeholder="Paste your long URL here">
 
-<br><br>
-
 <button onclick="shorten()">Shorten Link</button>
 
-<br><br>
-
 <input type="text" id="result" readonly placeholder="Short link will appear here">
+
+</div>
+
 
 <footer class="site-footer">
 <p>© 2026 FastTools • Free Online Tools</p>
 </footer>
+
 
 <script>
 
@@ -36,7 +44,7 @@ async function shorten(){
 
 let url=document.getElementById("url").value;
 
-let response=await fetch("https://tinyurl.com/api-create.php?url="+encodeURIComponent(url));
+let response=await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(url));
 
 let shortUrl=await response.text();
 
@@ -45,6 +53,7 @@ document.getElementById("result").value=shortUrl;
 }
 
 </script>
+
 
 </body>
 
