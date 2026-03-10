@@ -220,3 +220,21 @@ min-width:200px;
 button:hover{
 background:#1f2e3d;
 }
+
+/* QR TOOL */
+
+#qrcode-container{
+margin-top:25px;
+display:flex;
+justify-content:center;
+}
+
+#qrcode{
+padding:10px;
+background:white;
+border-radius:6px;
+}
+
+#downloadBtn{
+margin-top:20px;
+}
