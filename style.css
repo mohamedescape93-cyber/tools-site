@@ -352,3 +352,20 @@ font-size:14px;
 .back-link:hover{
 text-decoration:underline;
 }
+
+.back-bar{
+width:100%;
+padding:15px 40px;
+background:#f4f4f4;
+}
+
+.back-bar a{
+color:#334155;
+text-decoration:none;
+font-weight:500;
+font-size:14px;
+}
+
+.back-bar a:hover{
+text-decoration:underline;
+}
