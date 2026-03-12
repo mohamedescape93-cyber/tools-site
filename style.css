@@ -172,6 +172,10 @@ max-width:1200px;
 margin:50px auto;
 padding:0 20px;
 }
+.tool-icon{
+font-size:32px;
+margin-bottom:10px;
+}
 
 .tool-card{
 background:white;
