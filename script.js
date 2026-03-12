@@ -40,8 +40,23 @@ canvas.height = img.height
 
 ctx.drawImage(img,0,0)
 
+let outputType = imageFile.type
+
+// PNG does not compress well, convert to JPEG
+if(imageFile.type === "image/png"){
+outputType = "image/jpeg"
+}
+
 canvas.toBlob(function(blob){
-}, imageFile.type, qualitySlider.value)
+
+const url = URL.createObjectURL(blob)
+
+downloadLink.href = url
+downloadLink.download = "compressed-" + imageFile.name
+downloadLink.innerText = "Download Image"
+downloadLink.style.display = "block"
+
+}, outputType, qualitySlider.value)
   
 const url = URL.createObjectURL(blob)
 
