@@ -1,263 +1,207 @@
-/* =========================
-   GLOBAL
-========================= */
+/* ===============================
+GLOBAL
+================================*/
 
 body{
 font-family:Arial, sans-serif;
-background:#f4f6f9;
+background:#f1f5f9;
 margin:0;
-text-align:center;
+color:#334155;
 display:flex;
 flex-direction:column;
 min-height:100vh;
-color:#2c3e50;
 }
 
-/* =========================
-   TOP BAR
-========================= */
+/* ===============================
+HEADER
+================================*/
 
-.top-bar{
+.site-header{
 background:#334155;
-color:white;
-text-align:center;
 padding:20px 0;
-font-size:14px;
+text-align:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-.top-bar a{
+.logo{
 color:white;
-text-decoration:underline;
+font-size:32px;
+font-weight:bold;
+text-decoration:none;
+letter-spacing:1px;
 }
 
-/* =========================
-   BACK BUTTON
-========================= */
+/* ===============================
+BACK BUTTON
+================================*/
 
 .back-bar{
-width:100%;
-padding:20px 40px;
-box-sizing:border-box;
-text-align:left;
-}
-
-.back-link{
-font-weight:700;
-font-size:15px;
-color:#2c3e50;
-text-decoration:none;
-}
-
-.back-link:hover{
-text-decoration:underline;
-}
-
-/* =========================
-   MAIN TITLE
-========================= */
-
-h1{
-margin-top:20px;
-margin-bottom:20px;
-}
-
-/* =========================
-   TOOL CONTAINER
-========================= */
-
-.tool-container{
-max-width:600px;
-margin:60px auto;
-background:white;
-padding:40px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-text-align:center;
-}
-
-/* =========================
-   HOMEPAGE GRID
-========================= */
-
-.tools-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-max-width:1200px;
-margin:40px auto;
+max-width:1100px;
+margin:20px auto 0 auto;
 padding:0 20px;
 }
 
-/* =========================
-   TOOL CARD
-========================= */
-
-.tool-card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
+.back-bar a{
+font-weight:700;
 text-decoration:none;
-color:#2c3e50;
-transition:0.25s;
-display:block;
+color:#334155;
+font-size:15px;
 }
 
-.tool-card:hover{
-transform:translateY(-6px);
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
+.back-bar a:hover{
+text-decoration:underline;
 }
 
-.tool-card h3{
+/* ===============================
+MAIN TOOL CARD
+================================*/
+
+.tool-container{
+max-width:650px;
+margin:40px auto;
+background:white;
+padding:45px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+/* ===============================
+TITLE
+================================*/
+
+h1{
 margin-top:0;
+margin-bottom:15px;
+font-size:32px;
 }
 
-.tool-card p{
-font-size:14px;
-color:#555;
+p{
+color:#64748b;
+font-size:15px;
 }
 
-/* =========================
-   INPUTS
-========================= */
-
-input, textarea, select{
-width:100%;
-max-width:500px;
-padding:12px;
-font-size:16px;
-border-radius:6px;
-border:1px solid #ccc;
-margin:15px auto;
-display:block;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-button{
-background:#334155;
-color:white;
-border:none;
-padding:12px 25px;
-font-size:16px;
-border-radius:6px;
-cursor:pointer;
-margin-top:15px;
-min-width:200px;
-}
-
-button:hover{
-background:#1e293b;
-}
-
-.main-button{
-background:#334155;
-color:white;
-padding:14px 30px;
-border:none;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
-margin-top:20px;
-}
-
-.main-button:hover{
-background:#1e293b;
-}
-
-/* =========================
-   UPLOAD BOX
-========================= */
+/* ===============================
+UPLOAD BOX
+================================*/
 
 .upload-box{
 border:2px dashed #cbd5e1;
 padding:40px;
-margin:25px 0;
-border-radius:8px;
+border-radius:10px;
+margin-top:25px;
 background:#f8fafc;
 }
 
-/* =========================
-   SLIDER
-========================= */
+/* ===============================
+INPUTS
+================================*/
+
+input{
+width:100%;
+max-width:450px;
+padding:12px;
+font-size:16px;
+border-radius:6px;
+border:1px solid #cbd5e1;
+margin:15px auto;
+display:block;
+}
+
+/* ===============================
+SLIDER
+================================*/
 
 .quality-control{
-margin:20px 0;
+margin-top:20px;
 }
 
-/* =========================
-   IMAGE PREVIEW
-========================= */
+/* ===============================
+BUTTON
+================================*/
+
+.main-button{
+background:#2563eb;
+color:white;
+border:none;
+padding:14px 28px;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
+font-weight:bold;
+transition:0.2s;
+}
+
+.main-button:hover{
+background:#1d4ed8;
+}
+
+/* ===============================
+IMAGE PREVIEW
+================================*/
 
 #preview{
-display:block;
 max-width:350px;
-width:100%;
 margin:30px auto;
-border-radius:8px;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-
-.tool-container img{
 display:block;
-margin:25px auto;
+border-radius:8px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* =========================
-   DOWNLOAD BUTTON
-========================= */
+/* ===============================
+DOWNLOAD BUTTON
+================================*/
 
 #downloadLink{
 display:block;
 margin-top:20px;
-font-weight:bold;
+text-align:center;
 }
 
-/* =========================
-   DROP AREA
-========================= */
+/* ===============================
+HOMEPAGE GRID
+================================*/
 
-#drop-area{
-border:2px dashed #2c3e50;
-padding:40px;
-width:60%;
-margin:auto;
-background:white;
-cursor:pointer;
-}
-
-/* =========================
-   DESCRIPTION
-========================= */
-
-.description{
-max-width:800px;
+.tools-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:20px;
+max-width:1100px;
 margin:50px auto;
-font-size:16px;
-color:#444;
-line-height:1.6;
+padding:0 20px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+.tool-card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+text-decoration:none;
+color:#334155;
+transition:0.25s;
+}
+
+.tool-card:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* ===============================
+FOOTER
+================================*/
 
 .site-footer{
 margin-top:auto;
-padding:25px;
 background:#334155;
 color:white;
 text-align:center;
+padding:25px 10px;
 font-size:14px;
-}
-
-.site-footer p{
-margin:0;
 }
 
 .site-footer a{
 color:white;
 text-decoration:underline;
+margin:0 6px;
 }
