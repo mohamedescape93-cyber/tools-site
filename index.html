@@ -114,7 +114,6 @@
 </div>
 <p>Reduce JPG, PNG and WEBP image file size instantly.</p>
 </a>
-  
 <div class="description">
 
 <h2>PDF to Word Converter</h2>
@@ -154,10 +153,17 @@
 <p>Reduce the file size of JPG, PNG, and WEBP images without noticeable quality loss. Compress images quickly to improve website performance and save storage space. Perfect for web developers, designers, and content creators.</p>
 
 </div>
+  
+</div>
+
+<div class="description">
 
 <div class="site-description">
 <p>
 FastTools provides free online utilities including image converters, image compressors, QR generators, word counters, password generators, link shorteners, and text formatting tools. All tools run directly in your browser with no downloads required, making it fast and easy to complete everyday tasks online.
+FastTools provides free online utilities including image converters, image compressors, QR generators,
+word counters, password generators, link shorteners, and text formatting tools. All tools run directly
+in your browser with no downloads required, making it fast and easy to complete everyday tasks online.
 </p>
 </div>
 
@@ -172,14 +178,26 @@ FastTools provides free online utilities including image converters, image compr
 </footer>
 
 <script>
+window.onload = function () {
+window.scrollTo(0, 0);
+};
+</script> 
+<script>
 if ('scrollRestoration' in history) {
 history.scrollRestoration = 'manual';
 }
 
 window.onload = function () {
+window.addEventListener('beforeunload', function () {
 window.scrollTo(0,0);
 };
 </script>
+});
 
+window.addEventListener('load', function () {
+window.scrollTo(0,0);
+});
+</script>
 </body>
+
 </html>
