@@ -248,7 +248,9 @@ margin-top:50px;
 font-size:22px;
 color:#2c3e50;
 }
-
+.description h2{
+margin-top:60px;
+}
 .description p{
 max-width:800px;
 margin:15px auto 0 auto;
