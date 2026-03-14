@@ -18,19 +18,47 @@ HEADER
 
 .site-header{
 background:#2c3e50;
-padding:10px 40px;
 display:flex;
 align-items:center;
-height:80px;
-overflow:hidden;
+justify-content:space-between;
+padding:0 40px;
+height:90px;
 }
 
+/* ===============================
+LOGO
+================================*/
+
 .logo{
-color:white;
-font-size:30px;
-font-weight:bold;
+display:flex;
+align-items:center;
 text-decoration:none;
-letter-spacing:1px;
+}
+
+.logo img{
+height:70px;
+width:auto;
+display:block;
+}
+
+/* ===============================
+NAVIGATION
+================================*/
+
+.nav-menu{
+display:flex;
+gap:35px;
+}
+
+.nav-menu a{
+color:white;
+text-decoration:none;
+font-weight:600;
+font-size:16px;
+}
+
+.nav-menu a:hover{
+opacity:0.75;
 }
 
 /* ===============================
@@ -82,6 +110,7 @@ font-size:32px;
 color:#64748b;
 font-size:15px;
 }
+
 /* ===============================
 UPLOAD BOX
 ================================*/
@@ -161,7 +190,7 @@ text-align:center;
 }
 
 /* ===============================
-HOMEPAGE GRID
+TOOLS GRID
 ================================*/
 
 .tools-grid{
@@ -172,6 +201,7 @@ max-width:1200px;
 margin:50px auto;
 padding:0 20px;
 }
+
 .tool-icon{
 font-size:32px;
 margin-bottom:10px;
@@ -190,6 +220,7 @@ flex-direction:column;
 align-items:center;
 text-align:center;
 }
+
 .tool-card h3{
 margin:0 0 10px 0;
 font-size:18px;
@@ -206,34 +237,6 @@ max-width:220px;
 transform:translateY(-6px);
 box-shadow:0 14px 30px rgba(0,0,0,0.15);
 }
-/* ===============================
-FOOTER
-================================*/
-
-.site-footer{
-margin-top:auto;
-background:#334155;
-color:white;
-text-align:center;
-padding:25px 10px;
-font-size:14px;
-}
-
-.site-footer a{
-color:white;
-text-decoration:underline;
-  margin:0 6px}
-/* ===============================
-DESCRIPTION SECTION
-================================*/
-
-/* ===============================
-DESCRIPTION SECTION
-================================*/
-
-/* ===============================
-DESCRIPTION SECTION
-================================*/
 
 /* ===============================
 DESCRIPTION SECTION
@@ -279,31 +282,21 @@ color:#475569;
 font-size:15px;
 }
 
-.logo img{
-height:60px;
-width:auto;
-display:block;
-}
-.logo{
-display:flex;
-align-items:center;
-}
+/* ===============================
+FOOTER
+================================*/
 
-.nav-menu{
-margin-left:auto;
-display:flex;
-gap:30px;
-}
-
-
-
-.nav-menu a{
+.site-footer{
+margin-top:auto;
+background:#334155;
 color:white;
-text-decoration:none;
-font-weight:600;
-font-size:16px;
+text-align:center;
+padding:25px 10px;
+font-size:14px;
 }
 
-.nav-menu a:hover{
-opacity:0.7;
+.site-footer a{
+color:white;
+text-decoration:underline;
+margin:0 6px;
 }
