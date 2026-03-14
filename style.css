@@ -22,6 +22,7 @@ padding:10px 40px;
 display:flex;
 align-items:center;
 height:80px;
+overflow:hidden;
 }
 
 .logo{
@@ -279,8 +280,7 @@ font-size:15px;
 }
 
 .logo img{
-height:200%;
-max-height:300px;
+height:60px;
 width:auto;
 display:block;
 }
@@ -288,17 +288,14 @@ display:block;
 display:flex;
 align-items:center;
 }
-.nav-menu{
-margin-left:auto;
-display:flex;
-gap:30px;
-}
 
 .nav-menu{
 margin-left:auto;
 display:flex;
 gap:30px;
 }
+
+
 
 .nav-menu a{
 color:white;
