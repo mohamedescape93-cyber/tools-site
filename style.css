@@ -302,3 +302,21 @@ color:white;
 text-decoration:underline;
 margin:0 6px;
 }
+
+.upload-btn{
+background:#2a84ff;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+display:inline-block;
+}
+
+.upload-btn input{
+display:none;
+}
+
+#file-name{
+margin-left:10px;
+color:#ccc;
+}
