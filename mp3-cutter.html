@@ -13,46 +13,45 @@
 <style>
 
 body{
-background:#e6e7ea;
+background:#0f1623;
 font-family:Arial;
-}
-
-.tool-box{
-width:600px;
-margin:80px auto;
-background:#071428;
-padding:40px;
-border-radius:12px;
 color:white;
 }
 
+.tool{
+width:900px;
+margin:80px auto;
+}
+
 #waveform{
-margin-top:30px;
-background:#0a1c34;
+margin-top:20px;
+background:#0b1320;
 border-radius:6px;
 }
 
 .controls{
-margin-top:30px;
+margin-top:20px;
 display:flex;
+gap:20px;
 align-items:center;
-gap:15px;
 }
 
 button{
-background:#3a78ff;
+background:#2a84ff;
 border:none;
-color:white;
 padding:10px 18px;
+color:white;
 border-radius:6px;
 cursor:pointer;
 }
 
 input{
-width:80px;
-padding:6px;
-border-radius:4px;
+background:#121c2e;
 border:none;
+color:white;
+padding:6px;
+width:90px;
+border-radius:4px;
 }
 
 </style>
@@ -61,23 +60,21 @@ border:none;
 
 <body>
 
-<header class="site-header">
-<a href="index.html" class="logo">FastTools</a>
-</header>
-
-<div class="tool-box">
+<div class="tool">
 
 <h2>MP3 Cutter</h2>
 
-<input type="file" id="audioFile">
+<input type="file" id="audio">
 
 <div id="waveform"></div>
 
 <div class="controls">
 
-Start <input id="startTime" type="number" value="0">
+Cut from  
+<input id="start" type="text">
 
-End <input id="endTime" type="number">
+to  
+<input id="end" type="text">
 
 <button onclick="exportTrim()">Export</button>
 
@@ -88,55 +85,72 @@ End <input id="endTime" type="number">
 <script>
 
 let wavesurfer
+let region
 
 wavesurfer = WaveSurfer.create({
-container: '#waveform',
-waveColor: '#6c8fff',
-progressColor: '#3a78ff',
+container:'#waveform',
+waveColor:'#444',
+progressColor:'#2196f3',
 height:120,
-plugins: [
+plugins:[
 WaveSurfer.regions.create({})
 ]
 })
 
-document.getElementById("audioFile").addEventListener("change", function(e){
+document.getElementById("audio").addEventListener("change",function(e){
 
 const file = e.target.files[0]
-
-if(!file) return
-
 const url = URL.createObjectURL(file)
 
 wavesurfer.load(url)
 
-wavesurfer.on('ready', function(){
+})
 
-document.getElementById("endTime").value = wavesurfer.getDuration()
+wavesurfer.on("ready",function(){
+
+const duration = wavesurfer.getDuration()
+
+region = wavesurfer.addRegion({
+start:duration*0.2,
+end:duration*0.6,
+color:'rgba(255,215,0,0.4)',
+drag:true,
+resize:true
+})
+
+updateInputs()
+
+region.on("update-end",updateInputs)
 
 })
 
-})
+function updateInputs(){
+
+document.getElementById("start").value = region.start.toFixed(2)
+document.getElementById("end").value = region.end.toFixed(2)
+
+}
 
 function exportTrim(){
 
-let start = parseFloat(document.getElementById("startTime").value)
-let end = parseFloat(document.getElementById("endTime").value)
+let start = region.start
+let end = region.end
 
-const audioBuffer = wavesurfer.backend.buffer
-const sampleRate = audioBuffer.sampleRate
+const buffer = wavesurfer.backend.buffer
+const sampleRate = buffer.sampleRate
 
 const newBuffer = wavesurfer.backend.ac.createBuffer(
-audioBuffer.numberOfChannels,
+buffer.numberOfChannels,
 (end-start)*sampleRate,
 sampleRate
 )
 
-for(let channel=0; channel<audioBuffer.numberOfChannels; channel++){
+for(let channel=0; channel<buffer.numberOfChannels; channel++){
 
-const oldData = audioBuffer.getChannelData(channel)
+const oldData = buffer.getChannelData(channel)
 const newData = newBuffer.getChannelData(channel)
 
-for(let i=0; i<newData.length; i++){
+for(let i=0;i<newData.length;i++){
 newData[i] = oldData[i + start*sampleRate]
 }
 
@@ -155,32 +169,33 @@ source.start()
 
 offlineContext.startRendering().then(function(renderedBuffer){
 
-let wav = bufferToWave(renderedBuffer, renderedBuffer.length)
-let blob = new Blob([wav], {type:'audio/wav'})
+const wav = encodeWAV(renderedBuffer)
+const blob = new Blob([wav],{type:"audio/wav"})
 
-let url = URL.createObjectURL(blob)
+const url = URL.createObjectURL(blob)
 
-let a = document.createElement("a")
-a.href = url
-a.download = "trimmed_audio.wav"
+const a = document.createElement("a")
+a.href=url
+a.download="trimmed.wav"
 a.click()
 
 })
 
 }
 
-function bufferToWave(abuffer, len){
+function encodeWAV(buffer){
 
-let numOfChan = abuffer.numberOfChannels
-let length = len * numOfChan * 2 + 44
-let buffer = new ArrayBuffer(length)
-let view = new DataView(buffer)
-let channels = [], i, sample
-let offset = 0
-let pos = 0
+let numOfChan = buffer.numberOfChannels
+let length = buffer.length * numOfChan * 2 + 44
+let arrayBuffer = new ArrayBuffer(length)
+let view = new DataView(arrayBuffer)
 
-function setUint16(data){ view.setUint16(pos,data,true); pos+=2 }
-function setUint32(data){ view.setUint32(pos,data,true); pos+=4 }
+let channels=[]
+let offset=0
+let pos=0
+
+function setUint16(data){view.setUint16(pos,data,true);pos+=2}
+function setUint32(data){view.setUint32(pos,data,true);pos+=4}
 
 setUint32(0x46464952)
 setUint32(length-8)
@@ -190,28 +205,33 @@ setUint32(0x20746d66)
 setUint32(16)
 setUint16(1)
 setUint16(numOfChan)
-setUint32(abuffer.sampleRate)
-setUint32(abuffer.sampleRate * 2 * numOfChan)
-setUint16(numOfChan * 2)
+setUint32(buffer.sampleRate)
+setUint32(buffer.sampleRate*2*numOfChan)
+setUint16(numOfChan*2)
 setUint16(16)
 
 setUint32(0x61746164)
-setUint32(length - pos - 4)
+setUint32(length-pos-4)
 
-for(i=0;i<abuffer.numberOfChannels;i++)
-channels.push(abuffer.getChannelData(i))
+for(let i=0;i<buffer.numberOfChannels;i++)
+channels.push(buffer.getChannelData(i))
 
-while(pos < length){
-for(i=0;i<numOfChan;i++){
-sample = Math.max(-1,Math.min(1,channels[i][offset]))
-sample = (0.5 + sample<0 ? sample*32768 : sample*32767)|0
+while(pos<length){
+
+for(let i=0;i<numOfChan;i++){
+
+let sample=Math.max(-1,Math.min(1,channels[i][offset]))
+sample=(sample<0?sample*32768:sample*32767)|0
 view.setInt16(pos,sample,true)
 pos+=2
-}
-offset++
+
 }
 
-return buffer
+offset++
+
+}
+
+return arrayBuffer
 
 }
 
