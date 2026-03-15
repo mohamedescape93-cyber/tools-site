@@ -3,10 +3,11 @@
 
 <head>
 
+<meta charset="UTF-8">
 <title>MP3 Cutter - FastTools</title>
 
 <link rel="stylesheet" href="/tools-site/style.css">
-<img src="./fasttools-logo.png.png" alt="FastTools">
+
 <script src="https://unpkg.com/wavesurfer.js@7"></script>
 <script src="https://unpkg.com/wavesurfer.js/dist/plugins/regions.min.js"></script>
 <script src="https://unpkg.com/wavesurfer.js/dist/plugins/timeline.min.js"></script>
@@ -15,14 +16,17 @@
 <style>
 
 .tool-container{
-max-width:1000px;
-margin:auto;
-padding:40px 20px;
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 text-align:center;
 }
 
 #waveform{
-margin-top:40px;
+margin-top:30px;
 }
 
 #timeline{
@@ -30,9 +34,9 @@ margin-top:10px;
 }
 
 .upload-btn{
-background:#2a84ff;
-padding:12px 22px;
-border-radius:6px;
+background:#2563eb;
+padding:12px 24px;
+border-radius:8px;
 cursor:pointer;
 font-weight:bold;
 color:white;
@@ -45,7 +49,7 @@ display:none;
 
 #progress{
 margin-top:10px;
-color:#888;
+color:#64748b;
 }
 
 .controls{
@@ -58,7 +62,7 @@ flex-wrap:wrap;
 }
 
 button{
-background:#2a84ff;
+background:#2563eb;
 border:none;
 padding:10px 18px;
 color:white;
@@ -68,11 +72,11 @@ font-weight:bold;
 }
 
 button:hover{
-background:#1d6be0;
+background:#1d4ed8;
 }
 
 .timebox{
-background:#0d1d36;
+background:#f1f5f9;
 padding:8px;
 border-radius:4px;
 width:80px;
@@ -80,32 +84,33 @@ text-align:center;
 }
 
 .zoom{
-margin-top:30px;
+margin-top:25px;
 }
 
 </style>
 
+</head>
+
+<body>
+
 <header class="site-header">
 
 <a href="index.html" class="logo">
-<img src="fasttools-logo.png" alt="FastTools">
+<img src="/tools-site/fasttools-logo.png" alt="FastTools">
 </a>
 
 <nav class="nav-menu">
-<a href="index.html">Home</a>
-<a href="tools.html">Tools</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
+<a href="/tools-site/index.html">Home</a>
+<a href="/tools-site/tools.html">Tools</a>
+<a href="/tools-site/about.html">About</a>
+<a href="/tools-site/contact.html">Contact</a>
 </nav>
 
 </header>
 
-
-
-
 <div class="tool-container">
 
-<h2>MP3 Cutter</h2>
+<h1>MP3 Cutter</h1>
 
 <label class="upload-btn">
 Upload MP3
@@ -142,16 +147,13 @@ to
 <script>
 
 const RegionsPlugin = WaveSurfer.Regions.create()
-
-const TimelinePlugin = WaveSurfer.Timeline.create({
-container:"#timeline"
-})
+const TimelinePlugin = WaveSurfer.Timeline.create({ container:"#timeline" })
 
 const wavesurfer = WaveSurfer.create({
 container:"#waveform",
-waveColor:"#6c8fff",
-progressColor:"#2a84ff",
-cursorColor:"#2a84ff",
+waveColor:"#94a3b8",
+progressColor:"#2563eb",
+cursorColor:"#2563eb",
 height:120,
 plugins:[RegionsPlugin,TimelinePlugin]
 })
@@ -159,49 +161,24 @@ plugins:[RegionsPlugin,TimelinePlugin]
 let region
 
 function formatTime(sec){
-
 sec=Math.floor(sec)
-
 let m=Math.floor(sec/60)
 let s=sec%60
-
-if(s<10) s="0"+s
-
+if(s<10)s="0"+s
 return m+":"+s
-
 }
 
 document.getElementById("audio").addEventListener("change",function(e){
 
 const file=e.target.files[0]
-if(!file) return
+if(!file)return
 
 document.getElementById("progress").innerText="Loading audio..."
 
 const reader=new FileReader()
 
 reader.onload=function(event){
-
 wavesurfer.loadBlob(new Blob([event.target.result]))
-
-}
-
-reader.onprogress=function(event){
-
-if(event.lengthComputable){
-
-let percent=Math.round((event.loaded/event.total)*100)
-
-document.getElementById("progress").innerText="Uploading "+percent+"%"
-
-}
-
-}
-
-reader.onloadend=function(){
-
-document.getElementById("progress").innerText="Audio ready"
-
 }
 
 reader.readAsArrayBuffer(file)
@@ -215,7 +192,7 @@ const duration=wavesurfer.getDuration()
 region=RegionsPlugin.addRegion({
 start:duration*0.2,
 end:duration*0.6,
-color:'rgba(255,215,0,0.4)',
+color:'rgba(37,99,235,0.3)',
 drag:true,
 resize:true
 })
@@ -227,24 +204,17 @@ region.on('update-end',updateInputs)
 })
 
 function updateInputs(){
-
 document.getElementById("start").innerText=formatTime(region.start)
 document.getElementById("end").innerText=formatTime(region.end)
-
 }
 
 document.getElementById("play").onclick=function(){
-
 wavesurfer.playPause()
-
 this.innerText=wavesurfer.isPlaying()?"Pause":"Play"
-
 }
 
 document.getElementById("zoom").oninput=function(){
-
 wavesurfer.zoom(this.value)
-
 }
 
 document.getElementById("export").onclick=function(){
@@ -267,28 +237,23 @@ let mp3Data=[]
 
 for(let i=0;i<samples.length;i+=sampleBlockSize){
 
-let sampleChunk=samples.subarray(i,i+sampleBlockSize)
+let chunk=samples.subarray(i,i+sampleBlockSize)
+let int16=new Int16Array(chunk.length)
 
-let int16Chunk=new Int16Array(sampleChunk.length)
-
-for(let j=0;j<sampleChunk.length;j++){
-int16Chunk[j]=sampleChunk[j]*32767
+for(let j=0;j<chunk.length;j++){
+int16[j]=chunk[j]*32767
 }
 
-let mp3buf=mp3encoder.encodeBuffer(int16Chunk)
+let mp3buf=mp3encoder.encodeBuffer(int16)
 
-if(mp3buf.length>0)
-mp3Data.push(mp3buf)
+if(mp3buf.length>0) mp3Data.push(mp3buf)
 
 }
 
 let mp3buf=mp3encoder.flush()
-
-if(mp3buf.length>0)
-mp3Data.push(mp3buf)
+if(mp3buf.length>0) mp3Data.push(mp3buf)
 
 const blob=new Blob(mp3Data,{type:'audio/mp3'})
-
 const url=URL.createObjectURL(blob)
 
 const a=document.createElement("a")
