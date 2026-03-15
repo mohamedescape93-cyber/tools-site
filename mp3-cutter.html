@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>MP3 Cutter</title>
+<title>MP3 Cutter - FastTools</title>
 
 <script src="https://unpkg.com/wavesurfer.js@7"></script>
+<script src="https://unpkg.com/wavesurfer.js/dist/plugins/regions.min.js"></script>
 
 <style>
 
 body{
-background:#0a1628;
+background:#071428;
 font-family:Arial;
 color:white;
 text-align:center;
 padding-top:80px;
 }
 
+h2{
+margin-bottom:30px;
+}
+
 #waveform{
 width:900px;
 margin:40px auto;
+}
+
+.controls{
+margin-top:40px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+}
+
+input{
+background:#0d1d36;
+border:none;
+padding:8px;
+border-radius:4px;
+color:white;
+width:90px;
+}
+
+button{
+background:#2a84ff;
+border:none;
+padding:10px 20px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#1d6be0;
 }
 
 </style>
@@ -33,16 +70,34 @@ margin:40px auto;
 
 <div id="waveform"></div>
 
+<div class="controls">
+
+Cut from
+<input id="start" readonly>
+
+to
+<input id="end" readonly>
+
+<button id="export">Export</button>
+
+</div>
+
 <script>
 
+const RegionsPlugin = WaveSurfer.Regions.create()
+
 const wavesurfer = WaveSurfer.create({
-container: '#waveform',
-waveColor: '#555',
-progressColor: '#2a84ff',
-height:120
+container:'#waveform',
+waveColor:'#666',
+progressColor:'#2a84ff',
+cursorColor:'#2a84ff',
+height:120,
+plugins:[RegionsPlugin]
 })
 
-document.getElementById("audio").addEventListener("change", function(e){
+let region
+
+document.getElementById("audio").addEventListener("change",function(e){
 
 const file = e.target.files[0]
 
@@ -54,7 +109,137 @@ wavesurfer.load(url)
 
 })
 
+wavesurfer.on("ready",()=>{
+
+const duration = wavesurfer.getDuration()
+
+region = RegionsPlugin.addRegion({
+start: duration * 0.2,
+end: duration * 0.6,
+color: 'rgba(255,215,0,0.4)',
+drag: true,
+resize: true
+})
+
+updateInputs()
+
+region.on('update-end',updateInputs)
+
+})
+
+function updateInputs(){
+
+document.getElementById("start").value = region.start.toFixed(2)
+document.getElementById("end").value = region.end.toFixed(2)
+
+}
+
+document.getElementById("export").onclick = async function(){
+
+const start = region.start
+const end = region.end
+
+const buffer = wavesurfer.getDecodedData()
+
+const sampleRate = buffer.sampleRate
+const length = (end-start) * sampleRate
+
+const newBuffer = new AudioContext().createBuffer(
+buffer.numberOfChannels,
+length,
+sampleRate
+)
+
+for(let channel=0; channel<buffer.numberOfChannels; channel++){
+
+const oldData = buffer.getChannelData(channel)
+const newData = newBuffer.getChannelData(channel)
+
+for(let i=0;i<length;i++){
+newData[i] = oldData[(start*sampleRate)+i]
+}
+
+}
+
+const offline = new OfflineAudioContext(
+newBuffer.numberOfChannels,
+newBuffer.length,
+sampleRate
+)
+
+const source = offline.createBufferSource()
+source.buffer = newBuffer
+source.connect(offline.destination)
+source.start()
+
+const rendered = await offline.startRendering()
+
+const wav = encodeWAV(rendered)
+
+const blob = new Blob([wav],{type:"audio/wav"})
+const url = URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = "trimmed.wav"
+a.click()
+
+}
+
+function encodeWAV(buffer){
+
+const numOfChan = buffer.numberOfChannels
+const length = buffer.length * numOfChan * 2 + 44
+const bufferArray = new ArrayBuffer(length)
+const view = new DataView(bufferArray)
+
+let channels=[]
+let offset=0
+let pos=0
+
+function setUint16(data){view.setUint16(pos,data,true);pos+=2}
+function setUint32(data){view.setUint32(pos,data,true);pos+=4}
+
+setUint32(0x46464952)
+setUint32(length-8)
+setUint32(0x45564157)
+
+setUint32(0x20746d66)
+setUint32(16)
+setUint16(1)
+setUint16(numOfChan)
+setUint32(buffer.sampleRate)
+setUint32(buffer.sampleRate*2*numOfChan)
+setUint16(numOfChan*2)
+setUint16(16)
+
+setUint32(0x61746164)
+setUint32(length-pos-4)
+
+for(let i=0;i<buffer.numberOfChannels;i++)
+channels.push(buffer.getChannelData(i))
+
+while(pos<length){
+
+for(let i=0;i<numOfChan;i++){
+
+let sample=Math.max(-1,Math.min(1,channels[i][offset]))
+sample=(sample<0?sample*32768:sample*32767)|0
+view.setInt16(pos,sample,true)
+pos+=2
+
+}
+
+offset++
+
+}
+
+return bufferArray
+
+}
+
 </script>
 
 </body>
+
 </html>
