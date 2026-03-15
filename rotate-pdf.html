@@ -7,7 +7,7 @@
 
 <title>Rotate PDF - FastTools</title>
 
-<meta name="description" content="Rotate PDF pages online instantly and download the corrected document.">
+<meta name="description" content="Rotate PDF pages online and preview changes before downloading.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -33,7 +33,7 @@ cursor:pointer;
 
 .preview-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
 gap:20px;
 margin-top:25px;
 }
@@ -49,10 +49,33 @@ text-align:center;
 .preview-item canvas{
 width:100%;
 border-radius:6px;
+transition:0.2s;
 }
 
-.rotate-controls{
-margin-top:25px;
+.rotate-btn{
+margin-top:10px;
+padding:6px 10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+.spinner{
+width:40px;
+height:40px;
+border:4px solid #cbd5e1;
+border-top:4px solid #2563eb;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:15px auto;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 </style>
@@ -81,9 +104,9 @@ margin-top:25px;
 
 <h1>Rotate PDF</h1>
 
-<p>Upload a PDF, preview pages, choose rotation angle, then download.</p>
+<p>Upload a PDF and rotate pages before downloading.</p>
 
-<div class="drop-area" id="drop-area">
+<div id="drop-area" class="drop-area">
 
 <p>Drag PDF here or click to upload</p>
 
@@ -93,43 +116,17 @@ margin-top:25px;
 
 <div id="preview" class="preview-grid"></div>
 
-<div class="rotate-controls">
-
-<label>Rotation Angle</label>
-
-<select id="angle">
-
-<option value="90">Rotate 90°</option>
-<option value="180">Rotate 180°</option>
-<option value="270">Rotate 270°</option>
-
-</select>
-
-</div>
-
-<button class="main-button" id="rotateBtn">
-Rotate & Download
+<button class="main-button" id="downloadBtn">
+Download Rotated PDF
 </button>
 
-<div id="loader" style="display:none;margin-top:20px">
+<div id="loader" style="display:none">
 
-<p>Processing PDF...</p>
+<p>Preparing PDF...</p>
 
 <div class="spinner"></div>
 
 </div>
-
-</div>
-
-
-<div class="more-tools">
-
-<h3>More Tools</h3>
-
-<a href="split-pdf.html">Split PDF</a>
-<a href="merge-pdf.html">Merge PDF</a>
-<a href="pdf-to-jpg.html">PDF to JPG</a>
-<a href="jpg-to-pdf.html">JPG to PDF</a>
 
 </div>
 
@@ -150,10 +147,11 @@ Rotate & Download
 const dropArea = document.getElementById("drop-area");
 const fileInput = document.getElementById("file-input");
 const preview = document.getElementById("preview");
-const rotateBtn = document.getElementById("rotateBtn");
+const downloadBtn = document.getElementById("downloadBtn");
 const loader = document.getElementById("loader");
 
-let pdfFile = null;
+let pdfFile;
+let rotations = [];
 
 dropArea.onclick = () => fileInput.click();
 
@@ -163,27 +161,28 @@ e.preventDefault();
 
 dropArea.addEventListener("drop", e=>{
 e.preventDefault();
-handleFile(e.dataTransfer.files[0]);
+loadPDF(e.dataTransfer.files[0]);
 });
 
 fileInput.addEventListener("change", ()=>{
-handleFile(fileInput.files[0]);
+loadPDF(fileInput.files[0]);
 });
 
 
-async function handleFile(file){
-
-if(!file) return;
+async function loadPDF(file){
 
 pdfFile = file;
 
 preview.innerHTML="";
+rotations=[];
 
 const buffer = await file.arrayBuffer();
 
 const pdf = await pdfjsLib.getDocument({data:buffer}).promise;
 
 for(let i=1;i<=pdf.numPages;i++){
+
+rotations.push(0);
 
 const page = await pdf.getPage(i);
 
@@ -202,15 +201,23 @@ viewport:viewport
 }).promise;
 
 const box = document.createElement("div");
-
 box.className="preview-item";
 
 box.appendChild(canvas);
 
-const label = document.createElement("div");
-label.innerText="Page "+i;
+const rotateBtn = document.createElement("button");
+rotateBtn.className="rotate-btn";
+rotateBtn.innerText="Rotate";
 
-box.appendChild(label);
+rotateBtn.onclick=()=>{
+
+rotations[i-1]+=90;
+
+canvas.style.transform="rotate("+rotations[i-1]+"deg)";
+
+};
+
+box.appendChild(rotateBtn);
 
 preview.appendChild(box);
 
@@ -219,10 +226,7 @@ preview.appendChild(box);
 }
 
 
-rotateBtn.addEventListener("click", rotatePDF);
-
-
-async function rotatePDF(){
+downloadBtn.addEventListener("click", async ()=>{
 
 if(!pdfFile){
 alert("Upload a PDF first");
@@ -237,10 +241,10 @@ const pdfDoc = await PDFLib.PDFDocument.load(bytes);
 
 const pages = pdfDoc.getPages();
 
-const angle = parseInt(document.getElementById("angle").value);
+pages.forEach((page,i)=>{
 
-pages.forEach(page=>{
-page.setRotation(PDFLib.degrees(angle));
+page.setRotation(PDFLib.degrees(rotations[i]));
+
 });
 
 const newBytes = await pdfDoc.save();
@@ -262,7 +266,7 @@ document.body.removeChild(link);
 
 loader.style.display="none";
 
-}
+});
 
 </script>
 
