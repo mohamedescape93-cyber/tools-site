@@ -128,8 +128,11 @@ wavesurfer.load(url)
 
 wavesurfer.on('ready', function(){
 
-document.getElementById("endTime").value = wavesurfer.getDuration()
-
+document.getElementById("audio").addEventListener("change",function(){
+const file=this.files[0]
+if(file){
+document.getElementById("file-name").innerText=file.name
+}
 })
 
 })
