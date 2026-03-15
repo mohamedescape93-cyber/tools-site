@@ -12,13 +12,24 @@
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js";
 </script>
+
 <style>
+
+.drop-area{
+border:2px dashed #cbd5e1;
+padding:40px;
+border-radius:10px;
+background:#f8fafc;
+margin-top:20px;
+cursor:pointer;
+}
 
 .preview-grid{
 display:grid;
@@ -36,17 +47,23 @@ text-align:center;
 }
 
 .preview-item canvas{
-max-width:100%;
+width:100%;
 border-radius:6px;
 }
 
-.drop-area{
-border:2px dashed #cbd5e1;
-padding:40px;
-border-radius:10px;
-background:#f8fafc;
-margin-top:20px;
-cursor:pointer;
+.spinner{
+width:40px;
+height:40px;
+border:4px solid #cbd5e1;
+border-top:4px solid #2563eb;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:15px auto;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 </style>
@@ -72,15 +89,12 @@ cursor:pointer;
 
 
 <div class="tool-container">
-<div id="loader" style="display:none;margin-top:20px;">
-<p>Preparing PDF...</p>
-<div class="spinner"></div>
-</div>
+
 <h1>Split PDF</h1>
 
 <p>Upload a PDF, preview its pages, and select the pages you want to extract.</p>
 
-<div class="drop-area" id="drop-area">
+<div id="drop-area" class="drop-area">
 
 <p>Drag PDF here or click to upload</p>
 
@@ -88,10 +102,19 @@ cursor:pointer;
 
 </div>
 
-<div class="preview-grid" id="preview"></div>
+<div id="preview" class="preview-grid"></div>
 
-<button class="main-button" onclick="splitPDF()">Download Selected Pages</button>
+<button class="main-button" id="splitBtn">
+Download Selected Pages
+</button>
 
+<div id="loader" style="display:none">
+
+<p>Preparing PDF...</p>
+
+<div class="spinner"></div>
+
+</div>
 
 </div>
 
@@ -124,9 +147,11 @@ cursor:pointer;
 const dropArea = document.getElementById("drop-area");
 const fileInput = document.getElementById("file-input");
 const preview = document.getElementById("preview");
+const splitBtn = document.getElementById("splitBtn");
+const loader = document.getElementById("loader");
 
-let pdfFile;
-  
+let pdfFile = null;
+
 dropArea.onclick = () => fileInput.click();
 
 dropArea.addEventListener("dragover", e=>{
@@ -135,81 +160,84 @@ e.preventDefault();
 
 dropArea.addEventListener("drop", e=>{
 e.preventDefault();
-loadPDF(e.dataTransfer.files[0]);
+handleFile(e.dataTransfer.files[0]);
 });
 
 fileInput.addEventListener("change", ()=>{
-loadPDF(fileInput.files[0]);
+handleFile(fileInput.files[0]);
 });
 
-async function loadPDF(file){
+
+async function handleFile(file){
+
+if(!file) return;
 
 pdfFile = file;
 
-const pdfBytes = await file.arrayBuffer();
-preview.innerHTML="";
+preview.innerHTML = "";
 
-const pdf = await pdfjsLib.getDocument({data:pdfBytes}).promise;
+const buffer = await file.arrayBuffer();
+
+const pdf = await pdfjsLib.getDocument({data:buffer}).promise;
 
 for(let i=1;i<=pdf.numPages;i++){
 
 const page = await pdf.getPage(i);
 
-const viewport = page.getViewport({scale:0.4});
+const viewport = page.getViewport({scale:0.5});
 
 const canvas = document.createElement("canvas");
 
-const context = canvas.getContext("2d");
-
-canvas.height = viewport.height;
+const ctx = canvas.getContext("2d");
 
 canvas.width = viewport.width;
+canvas.height = viewport.height;
 
 await page.render({
-canvasContext:context,
+canvasContext:ctx,
 viewport:viewport
 }).promise;
 
-const div = document.createElement("div");
+const box = document.createElement("div");
 
-div.className="preview-item";
+box.className="preview-item";
 
-div.innerHTML=`
-`;
+box.appendChild(canvas);
 
-div.appendChild(canvas);
+const label = document.createElement("div");
+label.innerText = "Page " + i;
 
 const checkbox = document.createElement("input");
-
 checkbox.type="checkbox";
 checkbox.checked=true;
 
-div.appendChild(document.createElement("br"));
-div.appendChild(checkbox);
+box.appendChild(label);
+box.appendChild(checkbox);
 
-preview.appendChild(div);
-
-}
+preview.appendChild(box);
 
 }
 
+}
 
-aasync function splitPDF(){
+
+splitBtn.addEventListener("click", splitPDF);
+
+
+async function splitPDF(){
 
 if(!pdfFile){
 alert("Upload a PDF first");
 return;
 }
 
-document.getElementById("loader").style.display="block";
-
-const { PDFDocument } = PDFLib;
+loader.style.display="block";
 
 const bytes = await pdfFile.arrayBuffer();
 
-const originalPDF = await PDFDocument.load(bytes);
+const pdfDoc = await PDFLib.PDFDocument.load(bytes);
 
-const newPDF = await PDFDocument.create();
+const newPDF = await PDFLib.PDFDocument.create();
 
 const items = document.querySelectorAll(".preview-item");
 
@@ -219,7 +247,7 @@ const checked = items[i].querySelector("input").checked;
 
 if(!checked) continue;
 
-const [page] = await newPDF.copyPages(originalPDF,[i]);
+const [page] = await newPDF.copyPages(pdfDoc,[i]);
 
 newPDF.addPage(page);
 
@@ -242,7 +270,7 @@ link.click();
 
 document.body.removeChild(link);
 
-document.getElementById("loader").style.display="none";
+loader.style.display="none";
 
 }
 
