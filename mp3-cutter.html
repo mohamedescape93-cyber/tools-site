@@ -15,7 +15,7 @@ background:#071428;
 font-family:Arial;
 color:white;
 text-align:center;
-padding-top:80px;
+padding-top:60px;
 }
 
 h2{
@@ -25,6 +25,24 @@ margin-bottom:30px;
 #waveform{
 width:900px;
 margin:40px auto;
+}
+
+.upload-btn{
+background:#2a84ff;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+display:inline-block;
+}
+
+.upload-btn input{
+display:none;
+}
+
+#progress{
+margin-top:10px;
+color:#aaa;
 }
 
 .controls{
@@ -41,7 +59,8 @@ border:none;
 padding:8px;
 border-radius:4px;
 color:white;
-width:90px;
+width:80px;
+text-align:center;
 }
 
 button{
@@ -58,14 +77,6 @@ button:hover{
 background:#1d6be0;
 }
 
-.file-input{
-margin-bottom:20px;
-}
-
-.file-input input{
-color:white;
-}
-
 </style>
 
 </head>
@@ -74,13 +85,12 @@ color:white;
 
 <h2>MP3 Cutter</h2>
 
-<div class="file-input">
 <label class="upload-btn">
 Upload MP3
 <input type="file" id="audio" accept="audio/*">
 </label>
-<span id="file-name"></span> accept="audio/*">
-</div>
+
+<div id="progress"></div>
 
 <div id="waveform"></div>
 
@@ -110,119 +120,144 @@ cursorColor:'#2a84ff',
 height:120,
 plugins:[RegionsPlugin]
 })
+
+let region
+
 function formatTime(sec){
 
-sec = Math.floor(sec)
+sec=Math.floor(sec)
 
-let minutes = Math.floor(sec / 60)
-let seconds = sec % 60
+let m=Math.floor(sec/60)
+let s=sec%60
 
-if(seconds < 10) seconds = "0" + seconds
+if(s<10) s="0"+s
 
-return minutes + ":" + seconds
+return m+":"+s
 
 }
-let region
 
 document.getElementById("audio").addEventListener("change",function(e){
 
-const file = e.target.files[0]
+const file=e.target.files[0]
+
 if(!file) return
 
-document.getElementById("file-name").innerText = file.name
+document.getElementById("progress").innerText="Loading audio..."
 
-const url = URL.createObjectURL(file)
+const reader=new FileReader()
 
-wavesurfer.load(url)
+reader.onload=function(event){
+
+wavesurfer.loadBlob(new Blob([event.target.result]))
+
+}
+
+reader.onprogress=function(event){
+
+if(event.lengthComputable){
+
+let percent=Math.round((event.loaded/event.total)*100)
+
+document.getElementById("progress").innerText="Uploading "+percent+"%"
+
+}
+
+}
+
+reader.onloadend=function(){
+
+document.getElementById("progress").innerText="Audio loaded"
+
+}
+
+reader.readAsArrayBuffer(file)
 
 })
 
 wavesurfer.on("ready",()=>{
 
-const duration = wavesurfer.getDuration()
+const duration=wavesurfer.getDuration()
 
-region = RegionsPlugin.addRegion({
-start: duration * 0.2,
-end: duration * 0.6,
-color: 'rgba(255,215,0,0.4)',
-drag: true,
-resize: true
+region=RegionsPlugin.addRegion({
+start:duration*0.2,
+end:duration*0.6,
+color:'rgba(255,215,0,0.4)',
+drag:true,
+resize:true
+})
+
+updateInputs()
+
+region.on('update-end',updateInputs)
+
 })
 
 function updateInputs(){
 
-document.getElementById("start").value = formatTime(region.start)
-document.getElementById("end").value = formatTime(region.end)
-
-})
-
-function updateInputs(){
-
-document.getElementById("start").value = region.start.toFixed(2)
-document.getElementById("end").value = region.end.toFixed(2)
+document.getElementById("start").value=formatTime(region.start)
+document.getElementById("end").value=formatTime(region.end)
 
 }
 
-document.getElementById("play").onclick = function(){
+document.getElementById("play").onclick=function(){
 
 wavesurfer.playPause()
 
-this.innerText = wavesurfer.isPlaying() ? "Pause" : "Play"
+this.innerText=wavesurfer.isPlaying()?"Pause":"Play"
 
 }
 
-document.getElementById("export").onclick = function(){
+document.getElementById("export").onclick=function(){
 
-const start = region.start
-const end = region.end
+const start=region.start
+const end=region.end
 
-const buffer = wavesurfer.getDecodedData()
+const buffer=wavesurfer.getDecodedData()
 
-const sampleRate = buffer.sampleRate
-const startOffset = Math.floor(start * sampleRate)
-const endOffset = Math.floor(end * sampleRate)
+const sampleRate=buffer.sampleRate
 
-const length = endOffset - startOffset
+const startOffset=Math.floor(start*sampleRate)
+const endOffset=Math.floor(end*sampleRate)
 
-const context = new AudioContext()
+const length=endOffset-startOffset
 
-const newBuffer = context.createBuffer(
+const context=new AudioContext()
+
+const newBuffer=context.createBuffer(
 buffer.numberOfChannels,
 length,
 sampleRate
 )
 
-for(let channel=0; channel<buffer.numberOfChannels; channel++){
+for(let channel=0;channel<buffer.numberOfChannels;channel++){
 
-const oldData = buffer.getChannelData(channel)
-const newData = newBuffer.getChannelData(channel)
+const oldData=buffer.getChannelData(channel)
+const newData=newBuffer.getChannelData(channel)
 
 for(let i=0;i<length;i++){
-
-newData[i] = oldData[startOffset + i]
-
+newData[i]=oldData[startOffset+i]
 }
 
 }
 
-const wav = encodeWAV(newBuffer)
+const wav=encodeWAV(newBuffer)
 
-const blob = new Blob([wav],{type:"audio/wav"})
-const url = URL.createObjectURL(blob)
+const blob=new Blob([wav],{type:"audio/wav"})
+const url=URL.createObjectURL(blob)
 
-const a = document.createElement("a")
-a.href = url
-a.download = "trimmed.wav"
+const a=document.createElement("a")
+a.href=url
+a.download="trimmed.wav"
 a.click()
 
 }
 
 function encodeWAV(buffer){
 
-const numOfChan = buffer.numberOfChannels
-const length = buffer.length * numOfChan * 2 + 44
-const bufferArray = new ArrayBuffer(length)
-const view = new DataView(bufferArray)
+const numOfChan=buffer.numberOfChannels
+const length=buffer.length*numOfChan*2+44
+const bufferArray=new ArrayBuffer(length)
+const view=new DataView(bufferArray)
 
 let channels=[]
 let offset=0
