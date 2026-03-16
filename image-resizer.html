@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Image Resizer - FastTools</title>
+
+<meta name="description" content="Resize images online instantly. Change width and height and download the resized image.">
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+<a href="index.html" class="logo">
+<img src="fasttools-logo.png.png" alt="FastTools">
+</a>
+
+<nav class="nav-menu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">Tools</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+<div class="tool-container">
+
+<h1>Image Resizer</h1>
+
+<p>Upload an image and resize it instantly.</p>
+
+<div class="upload-box">
+
+<label class="upload-btn">
+Upload Image
+<input type="file" id="upload" accept="image/*">
+</label>
+
+<span id="file-name"></span>
+
+</div>
+
+<img id="preview">
+
+<div style="margin-top:20px">
+
+<input type="number" id="width" placeholder="Width">
+
+<input type="number" id="height" placeholder="Height">
+
+</div>
+
+<button class="main-button" onclick="resizeImage()">
+Resize Image
+</button>
+
+<a id="downloadLink"></a>
+
+</div>
+
+
+<div class="more-tools">
+
+<h3>More Tools</h3>
+
+<a href="image-converter.html">Image Converter</a>
+<a href="compress-image.html">Image Compressor</a>
+<a href="png-to-jpg.html">PNG to JPG</a>
+<a href="jpg-to-png.html">JPG to PNG</a>
+
+</div>
+
+
+<footer class="site-footer">
+
+<p>
+© 2026 FastTools • Free Online Tools
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
+<a href="contact.html">Contact</a>
+</p>
+
+</footer>
+
+
+<script>
+
+let img = new Image();
+
+document.getElementById("upload").addEventListener("change", function(){
+
+const file = this.files[0];
+
+if(!file) return;
+
+document.getElementById("file-name").innerText = file.name;
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+img.src = e.target.result;
+
+document.getElementById("preview").src = e.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+
+function resizeImage(){
+
+const width = parseInt(document.getElementById("width").value);
+
+const height = parseInt(document.getElementById("height").value);
+
+if(!width || !height){
+alert("Enter width and height");
+return;
+}
+
+const canvas = document.createElement("canvas");
+
+canvas.width = width;
+canvas.height = height;
+
+const ctx = canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,width,height);
+
+const resized = canvas.toDataURL("image/jpeg",0.95);
+
+const link = document.getElementById("downloadLink");
+
+link.href = resized;
+
+link.download = "resized-image.jpg";
+
+link.innerText = "Download Image";
+
+link.className = "main-button";
+
+}
+
+</script>
+
+</body>
+</html>
