@@ -5,9 +5,9 @@
 
 <meta charset="UTF-8">
 
-<title>Image Resizer & Crop - FastTools</title>
+<title>Resize Image Online Free - Crop & Resize Images | FastTools</title>
 
-<meta name="description" content="Resize and crop images online with drag controls.">
+<meta name="description" content="Resize and crop images online for free. Adjust size, zoom, rotate and download instantly. Fast and easy image resizer tool.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -21,18 +21,52 @@ href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
+.tool-container{
+max-width:800px;
+margin:80px auto 40px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tool-container h1{
+margin-bottom:10px;
+color:#1e293b;
+}
+
+.tool-container p{
+color:#64748b;
+font-size:14px;
+}
+
+/* UPLOAD */
+.upload-box{
+margin-top:20px;
+}
+
+/* IMAGE AREA */
 .editor-container{
 max-width:800px;
-margin:auto;
-margin-top:20px;
+margin:20px auto;
 }
 
 #image{
 max-width:100%;
+border-radius:10px;
 }
 
+/* CONTROLS */
 .controls{
-margin-top:20px;
+margin-top:25px;
 display:flex;
 gap:10px;
 flex-wrap:wrap;
@@ -42,15 +76,68 @@ justify-content:center;
 .controls button{
 padding:10px 16px;
 border:none;
-background:#2563eb;
+background:#3a78ff;
 color:white;
 border-radius:6px;
 cursor:pointer;
 }
 
-.upload-box{
-margin-top:20px;
+.controls button:hover{
+background:#2a66e6;
+}
+
+/* SEO CONTENT */
+.seo-content{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:35px 40px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content h2{
+font-size:24px;
+margin-bottom:15px;
+color:#1e293b;
+}
+
+.seo-content p{
+font-size:15px;
+line-height:1.8;
+color:#475569;
+margin-bottom:15px;
+}
+
+.seo-content ul{
+list-style:none;
+padding-left:0;
+}
+
+.seo-content li{
+margin-bottom:10px;
+font-size:15px;
+}
+
+.seo-content li::before{
+content:"✔";
+color:#3a78ff;
+margin-right:8px;
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
 text-align:center;
+padding:25px 10px;
+margin-top:60px;
+font-size:14px;
 }
 
 </style>
@@ -74,23 +161,20 @@ text-align:center;
 
 </header>
 
-
 <div class="tool-container">
 
 <h1>Image Resizer & Crop</h1>
 
-<p>Resize, crop, zoom and rotate images easily.</p>
+<p>
+Resize, crop, zoom and rotate images easily online. Adjust your image size instantly with no software required.
+</p>
 
 <div class="upload-box">
-
 <input type="file" id="upload" accept="image/*">
-
 </div>
 
 <div class="editor-container">
-
 <img id="image">
-
 </div>
 
 <div class="controls">
@@ -107,6 +191,28 @@ text-align:center;
 
 </div>
 
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>How to resize and crop images</h2>
+
+<ul>
+<li>Upload your image</li>
+<li>Adjust crop area and zoom</li>
+<li>Rotate or resize as needed</li>
+<li>Download your edited image</li>
+</ul>
+
+<p>
+This free image resizer and crop tool allows you to edit images directly in your browser. 
+Perfect for social media, websites, and resizing photos quickly.
+</p>
+
+<p>
+يمكنك تعديل الصور بسهولة من خلال القص والتكبير والتدوير بدون الحاجة لأي برامج. الأداة تعمل مباشرة من المتصفح.
+</p>
+
+</div>
 
 <footer class="site-footer">
 
@@ -120,7 +226,6 @@ text-align:center;
 
 </footer>
 
-
 <script>
 
 let cropper;
@@ -128,7 +233,6 @@ let cropper;
 document.getElementById("upload").addEventListener("change",function(){
 
 const file = this.files[0];
-
 if(!file) return;
 
 const reader = new FileReader();
@@ -136,7 +240,6 @@ const reader = new FileReader();
 reader.onload = function(e){
 
 const image = document.getElementById("image");
-
 image.src = e.target.result;
 
 if(cropper){
@@ -155,7 +258,6 @@ reader.readAsDataURL(file);
 
 });
 
-
 function downloadImage(){
 
 const canvas = cropper.getCroppedCanvas();
@@ -163,9 +265,7 @@ const canvas = cropper.getCroppedCanvas();
 const link = document.createElement("a");
 
 link.download = "edited-image.png";
-
 link.href = canvas.toDataURL();
-
 link.click();
 
 }
