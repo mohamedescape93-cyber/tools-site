@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Remove Background - FastTools</title>
+
+<link rel="stylesheet" href="/tools-site/style.css">
+
+<style>
+
+.tool-container{
+max-width:800px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:12px;
+text-align:center;
+}
+
+.preview{
+margin-top:20px;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+}
+
+button{
+margin-top:15px;
+padding:10px 20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+<a href="/tools-site/index.html" class="logo">
+<img src="/tools-site/fasttools-logo.png.png">
+</a>
+</header>
+
+<div class="tool-container">
+
+<h1>Remove Background</h1>
+
+<input type="file" id="image">
+
+<div class="preview">
+<img id="result">
+</div>
+
+<button id="download" style="display:none;">Download</button>
+
+</div>
+
+<script>
+
+const input = document.getElementById("image")
+const resultImg = document.getElementById("result")
+const downloadBtn = document.getElementById("download")
+
+input.addEventListener("change", async function(){
+
+const file = input.files[0]
+
+if(!file) return
+
+const formData = new FormData()
+formData.append("image_file", file)
+
+const res = await fetch("https://api.remove.bg/v1.0/removebg", {
+method: "POST",
+headers: {
+"X-Api-Key": "vDgGS8XuaxTBuUC2pgzUbe8x"
+},
+body: formData
+})
+
+const blob = await res.blob()
+
+const url = URL.createObjectURL(blob)
+
+resultImg.src = url
+
+downloadBtn.style.display = "inline-block"
+
+downloadBtn.onclick = () => {
+const a = document.createElement("a")
+a.href = url
+a.download = "no-bg.png"
+a.click()
+}
+
+})
+
+</script>
+
+</body>
+</html>
