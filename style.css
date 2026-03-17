@@ -37,6 +37,7 @@ display:inline-block;
 
 .upload-btn input{
 display:none;
+  
 }
 
 #file-name{
@@ -554,4 +555,13 @@ height:100%;
 width:0%;
 background:#2563eb;
 transition:width 0.3s;
+}
+
+.waveform-region{
+border:3px solid #ffd43b;
+border-radius:6px;
+background:rgba(255,212,59,0.1);
+}
+#waveform canvas{
+opacity:0.85;
 }
