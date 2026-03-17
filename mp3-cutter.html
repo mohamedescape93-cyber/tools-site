@@ -129,36 +129,48 @@ margin-top:25px;
 
 <h1>MP3 Cutter</h1>
 
+<div class="upload-section">
+
 <label class="upload-btn">
 Upload MP3
 <input type="file" id="audio" accept="audio/*">
 </label>
 
-<!-- loader bar -->
 <div id="loader">
 <div id="bar"></div>
 </div>
 
+</div>
+
+<div class="editor">
+
+<div class="wave-area">
+
 <div id="waveform"></div>
 <div id="timeline"></div>
 
-<div class="zoom">
-Zoom
-<br>
-<input type="range" id="zoom" min="10" max="200" value="50">
 </div>
 
-<div class="controls">
+<div class="editor-controls">
 
-<button id="play">Play</button>
+<button id="play" class="main-play">▶ Play</button>
 
-Cut from
-<div class="timebox" id="start">0:00</div>
+<div class="time-display">
+<span id="start">0:00</span>
+<span>—</span>
+<span id="end">0:00</span>
+</div>
 
-to
-<div class="timebox" id="end">0:00</div>
+<div class="zoom">
+Zoom
+<input type="range" id="zoom" min="20" max="500" value="80">
+</div>
 
-<button id="export">Export MP3</button>
+<button id="export" class="main-button">Export MP3</button>
+
+</div>
+
+</div>
 
 </div>
 
