@@ -8,51 +8,50 @@
 
 <title>Remove Background Online Free | FastTools</title>
 
-<meta name="description" content="Remove image background online instantly. Upload your photo and get a transparent background in seconds.">
+<meta name="description" content="Remove image background online instantly. Upload your photo and get transparent background in seconds.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <style>
 
-body{
-background:#e6e7ea;
-font-family:'Segoe UI', Tahoma, sans-serif;
-margin:0;
-}
-
 /* TOOL */
 .tool-container{
-max-width:600px;
-margin:80px auto 40px;
-background:white;
-padding:35px;
-border-radius:14px;
+max-width:700px;
+margin:80px auto 30px;
+background:#071a33;
+color:white;
+padding:40px;
+border-radius:20px;
 text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tool-container p{
+color:#cbd5e1;
 }
 
 input{
 margin-top:15px;
 }
 
+/* PREVIEW */
 .preview{
 margin-top:20px;
 }
 
 .preview img{
 max-width:100%;
-border-radius:10px;
+border-radius:12px;
 }
 
 /* BUTTON */
 .main-button{
 margin-top:15px;
-padding:12px 20px;
+padding:14px 22px;
 background:#3a78ff;
 color:white;
 border:none;
-border-radius:6px;
+border-radius:10px;
 cursor:pointer;
 }
 
@@ -62,40 +61,34 @@ background:#2a66e6;
 
 #download{
 display:none;
-background:#1e293b;
+background:#020c1b;
 }
 
-#download:hover{
-background:#0f172a;
-}
-
+/* STATUS */
 .status{
 margin-top:10px;
-color:#475569;
+color:#94a3b8;
 }
 
 /* SEO */
 .seo-content{
-max-width:700px;
-margin:40px auto;
-background:white;
-padding:30px;
-border-radius:14px;
-box-shadow:0 8px 25px rgba(0,0,0,0.05);
-}
-
-.seo-content p:last-child{
-direction:rtl;
-text-align:right;
-}
-
-/* FOOTER */
-.site-footer{
-background:#3f5368;
+max-width:900px;
+margin:20px auto;
+background:#071a33;
 color:white;
-text-align:center;
-padding:25px;
-margin-top:60px;
+padding:35px;
+border-radius:20px;
+}
+
+/* SEO BOOST */
+.tool-description{
+max-width:900px;
+margin:30px auto 80px;
+background:white;
+padding:40px;
+border-radius:16px;
+color:#1e293b;
+line-height:1.8;
 }
 
 </style>
@@ -137,19 +130,43 @@ margin-top:60px;
 
 </div>
 
-<!-- SEO CONTENT -->
+<!-- SEO -->
 <div class="seo-content">
 
-<h2>How to remove image background</h2>
+<h2>Remove Image Background Online</h2>
 
 <p>
-Upload your image and automatically remove the background in seconds. 
-Perfect for product photos, profile pictures, and design work.
+Automatically remove backgrounds from images in seconds.
 </p>
 
-<p>
-يمكنك إزالة خلفية الصور بسهولة وتحميل الصورة بخلفية شفافة مباشرة.
+<p style="direction:rtl;text-align:right;">
+يمكنك إزالة خلفية الصور بسهولة وتحميلها مباشرة.
 </p>
+
+</div>
+
+<!-- SEO BOOST -->
+<div class="tool-description">
+
+<h2>What this tool does</h2>
+<p>
+Removes background from images automatically using AI.
+</p>
+
+<h2>How to use</h2>
+<ul>
+<li>Upload image</li>
+<li>Wait for processing</li>
+<li>Download result</li>
+</ul>
+
+<h2>Benefits</h2>
+<ul>
+<li>Fast processing</li>
+<li>High quality</li>
+<li>No software needed</li>
+<li>Free tool</li>
+</ul>
 
 </div>
 
@@ -177,30 +194,31 @@ input.addEventListener("change", async function(){
 const file = input.files[0];
 if(!file) return;
 
-status.innerText = "Removing background...";
+status.innerText = "Processing...";
 
-const formData = new FormData();
-formData.append("image_file", file);
+
 
 try{
 
-const res = await fetch("https://api.remove.bg/v1.0/removebg", {
+const formData = new FormData();
+formData.append("image", file);
+
+/* 🔴 CALL YOUR BACKEND HERE */
+const response = await fetch("TTSe7hjXhGk86bP9AUBEJw21", {
 method: "POST",
-headers: {
-"X-Api-Key": "TTSe7hjXhGk86bP9AUBEJw21"
-},
 body: formData
 });
 
-if(!res.ok){
-status.innerText = "Error removing background.";
-return;
+/*
+Expected response:
+{
+  image_url: "https://..."
 }
+*/
 
-const blob = await res.blob();
-const url = URL.createObjectURL(blob);
+const result = await response.json();
 
-resultImg.src = url;
+resultImg.src = result.image_url;
 
 status.innerText = "Done!";
 
@@ -208,14 +226,14 @@ downloadBtn.style.display = "inline-block";
 
 downloadBtn.onclick = () => {
 const a = document.createElement("a");
-a.href = url;
+a.href = result.image_url;
 a.download = "no-bg.png";
 a.click();
 };
 
 }catch(err){
 
-status.innerText = "Something went wrong.";
+status.innerText = "Error processing image";
 
 }
 
