@@ -5,9 +5,9 @@
 
 <meta charset="UTF-8">
 
-<title>Merge PDF - FastTools</title>
+<title>Merge PDF Online Free - Combine PDF Files | FastTools</title>
 
-<meta name="description" content="Merge multiple PDF files into one PDF instantly online for free.">
+<meta name="description" content="Merge PDF files online for free. Combine multiple PDFs into one document quickly and easily. No registration required.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -16,6 +16,44 @@
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
+.tool-container{
+max-width:800px;
+margin:80px auto 40px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tool-container h1{
+margin-bottom:10px;
+color:#1e293b;
+}
+
+.tool-container p{
+color:#64748b;
+font-size:14px;
+}
+
+/* DROP AREA */
+.drop-area{
+border:2px dashed #cbd5e1;
+padding:40px;
+border-radius:10px;
+background:#f8fafc;
+margin-top:20px;
+cursor:pointer;
+}
+
+/* PREVIEW */
 .preview-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -31,23 +69,100 @@ border-radius:8px;
 text-align:center;
 }
 
-.drop-area{
-border:2px dashed #cbd5e1;
-padding:40px;
-border-radius:10px;
-background:#f8fafc;
+/* BUTTONS */
+.main-button{
+display:inline-block;
 margin-top:20px;
+padding:10px 20px;
+background:#3a78ff;
+color:white;
+border:none;
+border-radius:6px;
 cursor:pointer;
+text-decoration:none;
+}
+
+.main-button:hover{
+background:#2a66e6;
 }
 
 .move-btn{
 margin:5px;
-padding:5px 10px;
+padding:6px 10px;
 border:none;
 background:#2563eb;
 color:white;
 border-radius:4px;
 cursor:pointer;
+}
+
+.move-btn:hover{
+background:#1d4ed8;
+}
+
+/* SEO CONTENT */
+.seo-content{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:35px 40px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content h2{
+font-size:24px;
+margin-bottom:15px;
+color:#1e293b;
+}
+
+.seo-content p{
+font-size:15px;
+line-height:1.8;
+color:#475569;
+margin-bottom:15px;
+}
+
+.seo-content ul{
+list-style:none;
+padding-left:0;
+}
+
+.seo-content li{
+margin-bottom:10px;
+}
+
+.seo-content li::before{
+content:"✔";
+color:#3a78ff;
+margin-right:8px;
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* MORE TOOLS */
+.more-tools{
+text-align:center;
+margin:40px 0;
+}
+
+.more-tools a{
+margin:0 10px;
+text-decoration:none;
+color:#2563eb;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px 10px;
+margin-top:60px;
+font-size:14px;
 }
 
 </style>
@@ -71,19 +186,17 @@ cursor:pointer;
 
 </header>
 
-
 <div class="tool-container">
 
 <h1>Merge PDF</h1>
 
-<p>Upload multiple PDF files and combine them into one PDF.</p>
+<p>
+Combine multiple PDF files into one document easily. Upload, reorder, and merge in seconds.
+</p>
 
 <div class="drop-area" id="drop-area">
-
 <p>Drag PDF files here or click to upload</p>
-
 <input type="file" id="file-input" accept=".pdf" multiple hidden>
-
 </div>
 
 <div class="preview-grid" id="preview"></div>
@@ -94,18 +207,39 @@ cursor:pointer;
 
 </div>
 
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>How to merge PDF files</h2>
+
+<ul>
+<li>Upload your PDF files</li>
+<li>Arrange them in the desired order</li>
+<li>Click "Merge PDFs"</li>
+<li>Download your combined PDF</li>
+</ul>
+
+<p>
+This free PDF merger allows you to combine multiple PDF files into a single document quickly and securely. 
+Perfect for organizing files, sharing documents, and simplifying workflows.
+</p>
+
+<p>
+يمكنك دمج ملفات PDF بسهولة وترتيبها حسب الحاجة وتحميلها كملف واحد بدون الحاجة لأي برامج.
+</p>
+
+</div>
 
 <div class="more-tools">
 
 <h3>More Tools</h3>
 
 <a href="jpg-to-pdf.html">JPG to PDF</a>
-<a href="pdf-to-word.html">PDF to Word</a>
 <a href="image-converter.html">Image Converter</a>
 <a href="compress-image.html">Image Compressor</a>
+<a href="word-counter.html">Word Counter</a>
 
 </div>
-
 
 <footer class="site-footer">
 <p>
@@ -116,7 +250,6 @@ cursor:pointer;
 <a href="contact.html">Contact</a>
 </p>
 </footer>
-
 
 <script>
 
@@ -144,11 +277,8 @@ handleFiles(fileInput.files);
 function handleFiles(newFiles){
 
 for(let file of newFiles){
-
 if(file.type !== "application/pdf") continue;
-
 files.push(file);
-
 }
 
 renderPreview();
@@ -201,25 +331,19 @@ renderPreview();
 async function mergePDF(){
 
 if(files.length===0){
-
 alert("Upload PDF files first");
-
 return;
-
 }
 
 const { PDFDocument } = PDFLib;
-
 const mergedPDF = await PDFDocument.create();
 
 for(const file of files){
 
 const bytes = await file.arrayBuffer();
-
 const pdf = await PDFDocument.load(bytes);
 
 const pages = await mergedPDF.copyPages(pdf,pdf.getPageIndices());
-
 pages.forEach(page => mergedPDF.addPage(page));
 
 }
@@ -231,11 +355,8 @@ const blob = new Blob([pdfBytes],{type:"application/pdf"});
 const link = document.getElementById("downloadLink");
 
 link.href = URL.createObjectURL(blob);
-
 link.download = "merged.pdf";
-
 link.innerText = "Download Merged PDF";
-
 link.className = "main-button";
 
 }
