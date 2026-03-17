@@ -9,10 +9,9 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="/tools-site/style.css">
 
-<script src="https://unpkg.com/wavesurfer.js@7"></script>
-<script src="https://unpkg.com/wavesurfer.js/dist/plugins/regions.min.js"></script>
-<script src="https://unpkg.com/wavesurfer.js/dist/plugins/timeline.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.0/lame.min.js"></script>
+<script src="https://unpkg.com/wavesurfer.js@6"></script>
+<script src="https://unpkg.com/wavesurfer.js@6/dist/plugin/wavesurfer.regions.min.js"></script>
+<script src="https://unpkg.com/wavesurfer.js@6/dist/plugin/wavesurfer.timeline.min.js"></script>
 
 <style>
 
@@ -179,8 +178,8 @@ progressColor:"#2563eb",
 cursorColor:"#2563eb",
 height:120,
 plugins:[
-WaveSurfer.Regions.create(),
-WaveSurfer.Timeline.create({
+WaveSurfer.regions.create(),
+WaveSurfer.timeline.create({
 container:"#timeline"
 })
 ]
@@ -189,54 +188,57 @@ container:"#timeline"
 let region
 
 function formatTime(sec){
-
 sec=Math.floor(sec)
-
 let m=Math.floor(sec/60)
 let s=sec%60
-
 if(s<10)s="0"+s
-
 return m+":"+s
-
 }
 
 document.getElementById("audio").addEventListener("change",function(e){
 
 const file=e.target.files[0]
 
-if(!file)return
+if(!file) return
 
 document.getElementById("progress").innerText="Loading audio..."
 
-wavesurfer.loadBlob(file)
+const reader=new FileReader()
+
+reader.onload=function(event){
+
+wavesurfer.loadBlob(new Blob([event.target.result]))
+
+}
+
+reader.readAsArrayBuffer(file)
 
 })
 
-wavesurfer.on("ready",()=>{
+wavesurfer.on("ready",function(){
 
 document.getElementById("progress").innerText=""
 
-const duration = wavesurfer.getDuration()
+const duration=wavesurfer.getDuration()
 
 region = wavesurfer.addRegion({
 start:duration*0.2,
 end:duration*0.6,
-color:"rgba(37,99,235,0.3)",
+color:'rgba(37,99,235,0.3)',
 drag:true,
 resize:true
 })
 
-updateTime()
+updateInputs()
 
-region.on("update-end",updateTime)
+region.on('update-end',updateInputs)
 
 })
 
-function updateTime(){
+function updateInputs(){
 
-document.getElementById("start").innerText = formatTime(region.start)
-document.getElementById("end").innerText = formatTime(region.end)
+document.getElementById("start").innerText=formatTime(region.start)
+document.getElementById("end").innerText=formatTime(region.end)
 
 }
 
@@ -250,64 +252,63 @@ this.innerText = wavesurfer.isPlaying() ? "Pause" : "Play"
 
 document.getElementById("zoom").oninput=function(){
 
-wavesurfer.zoom(this.value)
+wavesurfer.zoom(Number(this.value))
 
 }
 
 document.getElementById("export").onclick=function(){
 
-const start = region.start
-const end = region.end
+const start=region.start
+const end=region.end
 
-const buffer = wavesurfer.getDecodedData()
+const buffer=wavesurfer.backend.buffer
 
-const sampleRate = buffer.sampleRate
+const sampleRate=buffer.sampleRate
 
-const startOffset = Math.floor(start * sampleRate)
-const endOffset = Math.floor(end * sampleRate)
+const startOffset=Math.floor(start*sampleRate)
+const endOffset=Math.floor(end*sampleRate)
 
-const samples = buffer.getChannelData(0).slice(startOffset,endOffset)
+const samples=buffer.getChannelData(0).slice(startOffset,endOffset)
 
-const mp3encoder = new lamejs.Mp3Encoder(1,sampleRate,192)
+const mp3encoder=new lamejs.Mp3Encoder(1,sampleRate,192)
 
-const sampleBlockSize = 1152
+const sampleBlockSize=1152
 
 let mp3Data=[]
 
 for(let i=0;i<samples.length;i+=sampleBlockSize){
 
-let chunk = samples.subarray(i,i+sampleBlockSize)
+let chunk=samples.subarray(i,i+sampleBlockSize)
 
-let int16 = new Int16Array(chunk.length)
+let int16=new Int16Array(chunk.length)
 
 for(let j=0;j<chunk.length;j++){
-int16[j] = chunk[j]*32767
+int16[j]=chunk[j]*32767
 }
 
-let mp3buf = mp3encoder.encodeBuffer(int16)
+let mp3buf=mp3encoder.encodeBuffer(int16)
 
 if(mp3buf.length>0) mp3Data.push(mp3buf)
 
 }
 
-let mp3buf = mp3encoder.flush()
+let mp3buf=mp3encoder.flush()
 
 if(mp3buf.length>0) mp3Data.push(mp3buf)
 
-const blob = new Blob(mp3Data,{type:'audio/mp3'})
+const blob=new Blob(mp3Data,{type:'audio/mp3'})
 
-const url = URL.createObjectURL(blob)
+const url=URL.createObjectURL(blob)
 
-const a = document.createElement("a")
+const a=document.createElement("a")
 
-a.href = url
-a.download = "trimmed.mp3"
+a.href=url
+a.download="trimmed.mp3"
 
 a.click()
 
 }
 
 </script>
-
 </body>
 </html>
