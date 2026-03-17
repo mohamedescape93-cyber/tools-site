@@ -4,35 +4,51 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Audio Converter Online Free - Convert MP3 & WAV | FastTools</title>
 
 <meta name="description" content="Convert audio files online for free. Easily convert MP3 to WAV or WAV to MP3 instantly. Fast, secure and no registration required.">
 
 <link rel="stylesheet" href="style.css">
-
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.0/lame.min.js"></script>
 
 <style>
 
-body{
-background:#e6e7ea;
-font-family:Arial;
-margin:0;
-}
-
-.tool-box{
-width:600px;
-margin:80px auto;
-background:#071428;
-padding:40px;
-border-radius:12px;
+/* TOOL DARK */
+.tool-container{
+max-width:900px;
+margin:80px auto 30px;
+background:#071a33;
 color:white;
+padding:40px;
+border-radius:20px;
 text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
 }
 
+.tool-container p{
+color:#cbd5e1;
+}
+
+/* INPUT */
+input[type="file"]{
+margin-top:20px;
+background:#0c2547;
+padding:10px;
+border-radius:8px;
+color:white;
+}
+
+/* AUDIO */
+audio{
+margin-top:20px;
+width:100%;
+}
+
+/* CONTROLS */
 .controls{
 margin-top:25px;
 display:flex;
@@ -42,12 +58,21 @@ gap:15px;
 flex-wrap:wrap;
 }
 
+select{
+padding:8px;
+border-radius:6px;
+border:none;
+background:#0c2547;
+color:white;
+}
+
+/* BUTTON */
 button{
 background:#3a78ff;
 border:none;
 color:white;
 padding:10px 18px;
-border-radius:6px;
+border-radius:8px;
 cursor:pointer;
 }
 
@@ -55,60 +80,42 @@ button:hover{
 background:#2a66e6;
 }
 
-select{
-padding:6px;
-border-radius:4px;
-border:none;
-}
-
-audio{
-margin-top:20px;
-width:100%;
-}
-
+/* SEO DARK */
 .seo-content{
 max-width:900px;
-margin:60px auto;
+margin:20px auto;
+background:#071a33;
+color:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* LIGHT SEO BOOST */
+.tool-description{
+max-width:900px;
+margin:30px auto 80px;
 background:white;
-padding:35px 40px;
-border-radius:14px;
-box-shadow:0 8px 25px rgba(0,0,0,0.05);
-font-family: 'Segoe UI', Tahoma, sans-serif;
-}
-
-.seo-content h2{
-font-size:24px;
-margin-bottom:15px;
+padding:40px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 color:#1e293b;
-font-weight:600;
-}
-
-.seo-content p{
-font-size:15px;
 line-height:1.8;
-color:#475569;
-margin-bottom:15px;
 }
 
-.seo-content ul{
-margin:15px 0;
+.tool-description h2{
+margin-top:25px;
+}
+
+.tool-description ul{
 padding-left:20px;
 }
 
-.seo-content li{
+.tool-description li{
 margin-bottom:10px;
-font-size:15px;
-color:#334155;
 }
 
-.seo-content p:last-child{
-direction:rtl;
-text-align:right;
-font-size:15px;
-color:#555;
-}
-}
-
+/* MORE TOOLS */
 .more-tools{
 text-align:center;
 margin:40px 0;
@@ -118,29 +125,6 @@ margin:40px 0;
 margin:0 10px;
 text-decoration:none;
 color:#2563eb;
-}
-
-.site-footer{
-background:#3f5368;
-color:white;
-text-align:center;
-padding:25px 10px;
-margin-top:60px;
-font-size:14px;
-}
-
-.footer-links{
-margin-top:8px;
-}
-
-.footer-links a{
-color:white;
-text-decoration:none;
-margin:0 6px;
-}
-
-.footer-links a:hover{
-text-decoration:underline;
 }
 
 </style>
@@ -157,19 +141,20 @@ text-decoration:underline;
 
 <nav class="nav-menu">
 <a href="index.html">Home</a>
-<a href="tools.html">Tools</a>
+<a href="index.html#tools">Tools</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 </nav>
 
 </header>
 
-<div class="tool-box">
+<!-- TOOL -->
+<div class="tool-container">
 
 <h1>Audio Converter</h1>
 
 <p>
-Convert audio files online for free. Easily convert MP3 to WAV or WAV to MP3 instantly with high quality.
+Convert audio files online for free. Easily switch between MP3 and WAV formats with high quality.
 </p>
 
 <input type="file" id="audioFile" accept="audio/*">
@@ -191,29 +176,59 @@ Convert audio files online for free. Easily convert MP3 to WAV or WAV to MP3 ins
 
 </div>
 
-<!-- SEO CONTENT (VERY IMPORTANT) -->
+<!-- SEO DARK -->
 <div class="seo-content">
 
-<h2>How to convert audio files</h2>
-
-<ul>
-<li>Upload your audio file</li>
-<li>Select the format (MP3 or WAV)</li>
-<li>Click convert and download your file</li>
-</ul>
+<h2>Convert Audio Files Online</h2>
 
 <p>
-This free audio converter allows you to convert audio files quickly and easily.
-It supports popular formats like MP3 and WAV and works directly in your browser without uploading files to servers.
+This free audio converter allows you to quickly convert audio files between MP3 and WAV formats directly in your browser. 
+No uploads, no waiting, and no installation required.
 </p>
 
 <p>
-يمكنك تحويل الملفات الصوتية بسهولة من MP3 إلى WAV أو العكس بدون الحاجة لأي برامج.
-الأداة سريعة وتعمل مباشرة من المتصفح.
+يمكنك تحويل الملفات الصوتية بسهولة من MP3 إلى WAV أو العكس مباشرة من المتصفح بدون برامج.
 </p>
 
 </div>
 
+<!-- SEO BOOST (VERY IMPORTANT FOR GOOGLE) -->
+<div class="tool-description">
+
+<h2>What this tool does</h2>
+<p>
+This audio converter lets you transform audio files between MP3 and WAV formats instantly. It maintains good quality while allowing you to use your files across different devices and platforms.
+</p>
+
+<h2>How to use</h2>
+<ul>
+<li>Upload your audio file</li>
+<li>Select your desired format (MP3 or WAV)</li>
+<li>Click convert</li>
+<li>Download your new audio file</li>
+</ul>
+
+<h2>Benefits</h2>
+<ul>
+<li>Fast conversion directly in your browser</li>
+<li>No uploads to servers (privacy-friendly)</li>
+<li>Supports common formats (MP3 & WAV)</li>
+<li>Completely free</li>
+</ul>
+
+<h2>Use cases</h2>
+<p>
+Perfect for content creators, students, musicians, and anyone who needs to convert audio files for editing, sharing, or compatibility with different devices.
+</p>
+
+<h2>FAQ</h2>
+<p><strong>Is it free?</strong> Yes, completely free.</p>
+<p><strong>Is it safe?</strong> Your files stay in your browser and are not uploaded.</p>
+<p><strong>Does it reduce quality?</strong> MP3 compression may reduce size slightly, but quality remains high.</p>
+
+</div>
+
+<!-- MORE TOOLS -->
 <div class="more-tools">
 
 <h3>More Tools</h3>
@@ -229,19 +244,17 @@ It supports popular formats like MP3 and WAV and works directly in your browser 
 
 <p>
 © 2026 FastTools • Free Online Tools
-</p>
-
-<div class="footer-links">
-<a href="privacy.html">Privacy</a>
-<span>•</span>
-<a href="terms.html">Terms</a>
-<span>•</span>
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
 <a href="contact.html">Contact</a>
-</div>
+</p>
 
 </footer>
 
 <script>
+
+// SAME JS (UNCHANGED)
 
 let audioContext
 let audioBuffer
@@ -295,11 +308,7 @@ if(format === "mp3"){
 
 const samples = rendered.getChannelData(0)
 
-const mp3encoder = new lamejs.Mp3Encoder(
-1,
-rendered.sampleRate,
-192
-)
+const mp3encoder = new lamejs.Mp3Encoder(1, rendered.sampleRate, 192)
 
 const sampleBlockSize = 1152
 let mp3Data = []
@@ -307,7 +316,6 @@ let mp3Data = []
 for(let i=0;i<samples.length;i+=sampleBlockSize){
 
 let chunk = samples.subarray(i,i+sampleBlockSize)
-
 let int16 = new Int16Array(chunk.length)
 
 for(let j=0;j<chunk.length;j++){
@@ -329,7 +337,6 @@ mp3Data.push(mp3buf)
 }
 
 const blob = new Blob(mp3Data,{type:"audio/mp3"})
-
 downloadFile(blob,"converted.mp3","audio/mp3")
 
 }
