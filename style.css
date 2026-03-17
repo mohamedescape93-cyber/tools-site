@@ -120,9 +120,11 @@ text-align:center;
 }
 
 #waveform{
-width:100%;
+width:1000px;
 max-width:100%;
-margin-top:30px;
+height:180px;
+margin:30px auto;
+display:block;
 }
 
 #waveform canvas{
@@ -176,16 +178,11 @@ background:#f8fafc;
 /* ===============================
 INPUTS
 ================================*/
-
 .editor{
 max-width:1000px;
 margin:40px auto;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:25px;
+text-align:center;
 }
-
 input{
 width:100%;
 max-width:450px;
