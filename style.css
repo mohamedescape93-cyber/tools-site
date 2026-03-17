@@ -304,9 +304,10 @@ DESCRIPTION SECTION
 
 .tool-descriptions{
 max-width:900px;
-margin:60px auto;
-padding:20px;
-line-height:1.6;
+margin:80px auto;
+padding:20px 40px;
+line-height:1.7;
+text-align:left;
 }
 
 .tool-descriptions h2{
