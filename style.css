@@ -111,32 +111,12 @@ MAIN TOOL CARD
 ================================*/
 
 .tool-container{
-width:95%;
-max-width:1400px;
-margin:40px auto;
-background:white;
-padding:40px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-text-align:center;
-}
-#waveform{
-width:100%;
-height:200px;
-margin-top:30px;
-}
-#waveform canvas{
-width:100% !important;
-height:220px !important;
-}
-#loader{
-width:100%;
-height:6px;
-background:#e2e8f0;
-border-radius:4px;
-margin-top:15px;
-overflow:hidden;
-display:none;
+width:100vw;
+max-width:none;
+margin:0;
+padding:40px 20px;
+border-radius:0;
+box-shadow:none;
 }
 
 #bar{
@@ -493,49 +473,70 @@ font-size:14px;
 MP3 EDITOR
 ================================*/
 /* MP3 EDITOR */
+/* ===== MAIN EDITOR LAYOUT ===== */
 
 .editor{
+width:100%;
+max-width:1400px;
+margin:40px auto;
 display:grid;
-grid-template-columns:1fr 260px;
+grid-template-columns:1fr 280px;
 gap:40px;
-margin-top:30px;
 align-items:start;
+padding:0 20px;
 }
+
+/* ===== WAVE AREA ===== */
 
 .wave-area{
 width:100%;
 }
 
+/* WAVEFORM */
 #waveform{
 width:100%;
+height:220px;
 margin-top:20px;
+display:block;
 }
 
+/* TIMELINE */
 #timeline{
 width:100%;
+margin-top:10px;
 }
+
+/* ===== CONTROLS PANEL ===== */
 
 .editor-controls{
 background:#f8fafc;
 padding:25px;
-border-radius:10px;
+border-radius:12px;
 display:flex;
 flex-direction:column;
 gap:20px;
 align-items:center;
+width:100%;
 }
 
+/* BUTTONS */
 .editor-controls button{
-width:200px;
+width:100%;
+max-width:220px;
 }
 
+/* TIME DISPLAY */
 .time-display{
 font-weight:bold;
+font-size:16px;
 }
 
+/* ZOOM */
 .zoom input{
-width:200px;
+width:100%;
 }
+
+/* ===== LOADER ===== */
 
 #loader{
 width:100%;
@@ -554,11 +555,33 @@ background:#2563eb;
 transition:width 0.3s;
 }
 
+/* ===== REGION STYLE (TRIM BOX) ===== */
+
 .waveform-region{
 border:3px solid #ffd43b;
 border-radius:6px;
-background:rgba(255,212,59,0.1);
+background:rgba(255,212,59,0.12);
 }
+
+/* DIM OUTSIDE AREA */
 #waveform canvas{
-opacity:0.85;
+opacity:0.9;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width:900px){
+.editor{
+grid-template-columns:1fr;
+}
+
+.editor-controls{
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.editor-controls button{
+width:auto;
+}
 }
