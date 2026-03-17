@@ -233,7 +233,9 @@ updateInputs()
 
 region.on('update', updateInputs)
 })
-
+wavesurfer.on('finish', () => {
+  wavesurfer.play(region.start, region.end)
+})
 function updateInputs(){
 
 document.getElementById("start").innerText=formatTime(region.start)
