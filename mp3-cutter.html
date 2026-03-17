@@ -42,12 +42,15 @@ cursor:pointer;
 font-weight:bold;
 color:white;
 display:inline-block;
+  
 }
 
 .upload-btn input{
 display:none;
 }
-
+<div id="loader">
+<div id="bar"></div>
+</div>
 .controls{
 margin-top:30px;
 display:flex;
@@ -194,11 +197,20 @@ document.getElementById("audio").addEventListener("change",function(e){
 const file=e.target.files[0]
 if(!file)return
 
+document.getElementById("loader").style.display="block"
+document.getElementById("bar").style.width="30%"
+
 wavesurfer.loadBlob(file)
 
 })
 
 wavesurfer.on("ready",()=>{
+
+document.getElementById("bar").style.width="100%"
+
+setTimeout(()=>{
+document.getElementById("loader").style.display="none"
+},500)
 
 const duration=wavesurfer.getDuration()
 
