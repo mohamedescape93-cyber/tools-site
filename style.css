@@ -302,25 +302,20 @@ box-shadow:0 14px 30px rgba(0,0,0,0.15);
 DESCRIPTION SECTION
 ================================*/
 
-.description{
-max-width:1200px;
-margin:120px auto;
-padding:0 40px;
-text-align:center;
-}
-
-.description h2{
-margin-top:70px;
-font-size:26px;
-color:#2c3e50;
-}
-
-.description p{
+.tool-descriptions{
 max-width:900px;
-margin:20px auto;
-line-height:1.9;
-font-size:16px;
-color:#475569;
+margin:60px auto;
+padding:20px;
+line-height:1.6;
+}
+
+.tool-descriptions h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.tool-descriptions h3{
+margin-top:25px;
 }
 
 /* ===============================
