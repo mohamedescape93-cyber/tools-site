@@ -585,3 +585,46 @@ justify-content:center;
 width:auto;
 }
 }
+.control-bar{
+width:100%;
+margin-top:25px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+flex-wrap:wrap;
+}
+
+/* PLAY + EXPORT */
+.control-bar button{
+padding:10px 18px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* TIME DISPLAY */
+.time-group{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:bold;
+background:#f1f5f9;
+padding:8px 14px;
+border-radius:6px;
+}
+
+/* ZOOM */
+.zoom-bar{
+flex:1;
+display:flex;
+justify-content:center;
+}
+
+.zoom-bar input{
+width:100%;
+max-width:300px;
+}
