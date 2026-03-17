@@ -2,24 +2,58 @@
 <html>
 
 <head>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-<title>JPG to PNG Converter - FastTools</title>
+<meta charset="UTF-8">
+
+<title>JPG to PNG Converter Online Free - Convert Images | FastTools</title>
+
+<meta name="description" content="Convert JPG to PNG online for free. Upload images and convert to high-quality PNG instantly. Fast and easy JPG to PNG converter.">
 
 <link rel="stylesheet" href="style.css">
-
-<meta name="description" content="Convert JPG images to PNG online for free using FastTools.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
+.tool-container{
+max-width:700px;
+margin:80px auto 40px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tool-container h1{
+margin-bottom:10px;
+color:#1e293b;
+}
+
+.tool-container p{
+color:#64748b;
+font-size:14px;
+}
+
+/* DROP AREA */
 #drop-area{
 border:2px dashed #2c3e50;
 padding:40px;
-max-width:600px;
 margin:20px auto;
-background:white;
+background:#f8fafc;
 cursor:pointer;
-border-radius:8px;
+border-radius:10px;
+}
+
+/* PREVIEW */
+#preview{
+margin-top:15px;
 }
 
 #preview img{
@@ -28,13 +62,93 @@ margin:10px;
 border-radius:6px;
 }
 
-#preview{
-margin-top:15px;
+/* BUTTON */
+button{
+margin-top:20px;
+padding:10px 20px;
+background:#3a78ff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
 }
 
+button:hover{
+background:#2a66e6;
+}
+
+/* DOWNLOAD LINKS */
 #downloads a{
 display:block;
 margin:10px;
+color:#2563eb;
+text-decoration:none;
+}
+
+/* SEO CONTENT */
+.seo-content{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:35px 40px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content h2{
+font-size:24px;
+margin-bottom:15px;
+color:#1e293b;
+}
+
+.seo-content p{
+font-size:15px;
+line-height:1.8;
+color:#475569;
+margin-bottom:15px;
+}
+
+.seo-content ul{
+list-style:none;
+padding-left:0;
+}
+
+.seo-content li{
+margin-bottom:10px;
+font-size:15px;
+}
+
+.seo-content li::before{
+content:"✔";
+color:#3a78ff;
+margin-right:8px;
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* MORE TOOLS */
+.more-tools{
+text-align:center;
+margin:40px 0;
+}
+
+.more-tools a{
+margin:0 10px;
+text-decoration:none;
+color:#2563eb;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px 10px;
+margin-top:60px;
+font-size:14px;
 }
 
 </style>
@@ -55,18 +169,16 @@ margin:10px;
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 </nav>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 </header>
-<div class="back-bar">
-<a href="index.html" class="back-link">← Back to FastTools</a>
-</div>
 
 <div class="tool-container">
 
 <h1>JPG to PNG Converter</h1>
 
-<p>Upload JPG images and convert them to PNG instantly.</p>
+<p>
+Convert JPG images to PNG format instantly. Upload multiple images and download high-quality PNG files.
+</p>
 
 <div id="drop-area">
 <p>Drag & Drop Images Here or Click to Upload</p>
@@ -80,13 +192,36 @@ margin:10px;
 <div id="downloads"></div>
 
 </div>
+
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>How to convert JPG to PNG</h2>
+
+<ul>
+<li>Upload your JPG images</li>
+<li>Click "Convert to PNG"</li>
+<li>Download your converted images</li>
+</ul>
+
+<p>
+This free JPG to PNG converter allows you to convert images quickly and easily without losing quality. 
+Perfect for design, transparency support, and web usage.
+</p>
+
+<p>
+يمكنك تحويل صور JPG إلى PNG بسهولة مع الحفاظ على الجودة. الأداة سريعة وتعمل مباشرة من المتصفح.
+</p>
+
+</div>
+
 <div class="more-tools">
 
 <h3>More Tools</h3>
 
 <a href="audio-speed-changer.html">Audio Speed Changer</a>
 <a href="audio-converter.html">Audio Converter</a>
-<a href="password-generator.html">Password Generator</a>
+<a href="image-converter.html">Image Converter</a>
 <a href="compress-image.html">Image Compressor</a>
 
 </div>
@@ -100,7 +235,6 @@ margin:10px;
 <a href="contact.html">Contact</a>
 </p>
 </footer>
-
 
 <script>
 
@@ -141,7 +275,6 @@ preview.appendChild(img);
 function convert(){
 
 let files=fileInput.files;
-
 let downloads=document.getElementById("downloads");
 downloads.innerHTML="";
 
