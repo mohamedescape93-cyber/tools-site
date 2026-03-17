@@ -15,7 +15,7 @@
 
 <style>
 
-/* TOOL CONTAINER (MATCHES YOUR SYSTEM) */
+/* TOOL */
 .tool-container{
 max-width:1000px;
 margin:80px auto 40px;
@@ -24,23 +24,6 @@ color:white;
 padding:40px;
 border-radius:20px;
 text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.2);
-}
-
-/* DESCRIPTION TEXT */
-.tool-container p{
-color:#cbd5e1;
-}
-
-/* FILE INPUT */
-#upload{
-margin-top:20px;
-padding:12px;
-border-radius:8px;
-border:none;
-background:#0c2547;
-color:white;
-width:100%;
 }
 
 /* EDITOR */
@@ -51,9 +34,15 @@ grid-template-columns:1fr 320px;
 gap:30px;
 }
 
+@media(max-width:900px){
+.editor{
+grid-template-columns:1fr;
+}
+}
+
 /* CANVAS */
 #memeCanvas{
-max-width:100%;
+width:100%;
 background:#000;
 border-radius:10px;
 }
@@ -65,19 +54,12 @@ flex-direction:column;
 gap:15px;
 }
 
-/* INPUTS */
 .controls input{
 padding:12px;
 border-radius:8px;
 border:none;
 background:#0c2547;
 color:white;
-}
-
-/* RANGE + COLOR FIX */
-.controls input[type="range"],
-.controls input[type="color"]{
-padding:5px;
 }
 
 /* BUTTON */
@@ -88,62 +70,31 @@ color:white;
 border:none;
 border-radius:8px;
 cursor:pointer;
-font-weight:bold;
 }
 
 .controls button:hover{
 background:#2a66e6;
 }
 
-/* SEO SECTION (MATCH DARK STYLE) */
+/* SEO DARK */
 .seo-content{
 max-width:900px;
-margin:40px auto;
+margin:20px auto;
 background:#071a33;
 color:white;
-padding:35px 40px;
+padding:35px;
 border-radius:20px;
-box-shadow:0 20px 50px rgba(0,0,0,0.2);
 }
 
-.seo-content h2{
-color:white;
-margin-bottom:15px;
-}
-
-.seo-content p{
-color:#cbd5e1;
+/* SEO BOOST */
+.tool-description{
+max-width:900px;
+margin:30px auto 80px;
+background:white;
+padding:40px;
+border-radius:16px;
+color:#1e293b;
 line-height:1.8;
-}
-
-.seo-content ul{
-list-style:none;
-padding-left:0;
-}
-
-.seo-content li{
-margin-bottom:10px;
-}
-
-.seo-content li::before{
-content:"✔";
-color:#3a78ff;
-margin-right:8px;
-}
-
-/* FOOTER */
-.site-footer{
-background:#020c1b;
-color:#cbd5e1;
-text-align:center;
-padding:25px 10px;
-margin-top:60px;
-font-size:14px;
-}
-
-.site-footer a{
-color:#3a78ff;
-text-decoration:none;
 }
 
 </style>
@@ -171,17 +122,13 @@ text-decoration:none;
 
 <h1>Meme Generator</h1>
 
-<p>
-Create memes online easily. Add top and bottom text, customize style and download instantly.
-</p>
+<p>Create memes easily with custom text and styles.</p>
 
 <input type="file" id="upload" accept="image/*">
 
 <div class="editor">
 
-<div class="canvas-container">
 <canvas id="memeCanvas"></canvas>
-</div>
 
 <div class="controls">
 
@@ -194,7 +141,7 @@ Create memes online easily. Add top and bottom text, customize style and downloa
 <label>Text Color</label>
 <input type="color" id="textColor" value="#ffffff">
 
-<label>Outline Width</label>
+<label>Outline</label>
 <input type="range" id="strokeWidth" min="1" max="10" value="4">
 
 <button onclick="downloadMeme()">Download Meme</button>
@@ -205,33 +152,84 @@ Create memes online easily. Add top and bottom text, customize style and downloa
 
 </div>
 
-<!-- SEO CONTENT -->
+<!-- SEO -->
 <div class="seo-content">
 
-<h2>How to create a meme</h2>
+<h2>Create Memes Online</h2>
+<p>Create viral memes quickly using this free meme generator tool.</p>
 
+<p style="direction:rtl;text-align:right;">
+أنشئ ميمز بسهولة وبسرعة مباشرة من المتصفح.
+</p>
+
+</div>
+
+<!-- SEO BOOST -->
+<div class="tool-description">
+
+<h2>What this tool does</h2>
+<p>
+This tool allows you to create memes by adding custom text to any image instantly.
+</p>
+
+<h2>How to use</h2>
 <ul>
 <li>Upload your image</li>
 <li>Add top and bottom text</li>
-<li>Customize font size and color</li>
+<li>Customize style</li>
 <li>Download your meme</li>
 </ul>
 
+<h2>Benefits</h2>
+<ul>
+<li>Fast meme creation</li>
+<li>No watermark</li>
+<li>Free to use</li>
+<li>Works on all devices</li>
+</ul>
+
+<h2>Use cases</h2>
 <p>
-This free meme generator allows you to create memes quickly and easily.
-Perfect for social media and content creation.
+Perfect for social media, marketing, and content creation.
 </p>
 
-<p style="direction:rtl;text-align:right;">
-يمكنك إنشاء ميمز بسهولة عن طريق إضافة نصوص على الصور وتحميلها مباشرة بدون الحاجة لأي برامج.
-</p>
+</div>
+
+<!-- MORE TOOLS -->
+<div class="more-tools">
+
+<h3>Explore More Tools</h3>
+
+<div class="more-tools-grid">
+
+<a href="image-converter.html" class="more-tool-card">
+<span>🖼️</span>
+<p>Image Converter</p>
+</a>
+
+<a href="jpg-to-pdf.html" class="more-tool-card">
+<span>📄</span>
+<p>JPG to PDF</p>
+</a>
+
+<a href="link-shortener.html" class="more-tool-card">
+<span>🔗</span>
+<p>Link Shortener</p>
+</a>
+
+<a href="mp3-cutter.html" class="more-tool-card">
+<span>🎧</span>
+<p>MP3 Cutter</p>
+</a>
+
+</div>
 
 </div>
 
 <footer class="site-footer">
 
 <p>
-© 2026 FastTools
+© 2026 FastTools • Free Online Tools
 <br>
 <a href="privacy.html">Privacy</a> •
 <a href="terms.html">Terms</a> •
@@ -242,35 +240,29 @@ Perfect for social media and content creation.
 
 <script>
 
-window.onload = function(){
+let canvas=document.getElementById("memeCanvas");
+let ctx=canvas.getContext("2d");
+let img=new Image();
 
-const canvas = document.getElementById("memeCanvas");
-const ctx = canvas.getContext("2d");
+document.getElementById("upload").addEventListener("change",function(){
 
-let img = new Image();
-
-document.getElementById("upload").addEventListener("change", function(){
-
-const file = this.files[0];
+let file=this.files[0];
 if(!file) return;
 
-const reader = new FileReader();
+let reader=new FileReader();
 
-reader.onload = function(e){
-img.src = e.target.result;
-};
-
+reader.onload=e=>img.src=e.target.result;
 reader.readAsDataURL(file);
 
 });
 
-img.onload = function(){
+img.onload=function(){
 
-const maxWidth = 800;
-let scale = Math.min(maxWidth / img.width,1);
+let maxWidth=800;
+let scale=Math.min(maxWidth/img.width,1);
 
-canvas.width = img.width * scale;
-canvas.height = img.height * scale;
+canvas.width=img.width*scale;
+canvas.height=img.height*scale;
 
 draw();
 
@@ -283,42 +275,37 @@ el.addEventListener("input",draw);
 function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
-
 ctx.drawImage(img,0,0,canvas.width,canvas.height);
 
-const topText = document.getElementById("topText").value;
-const bottomText = document.getElementById("bottomText").value;
+let top=document.getElementById("topText").value;
+let bottom=document.getElementById("bottomText").value;
 
-const fontSize = document.getElementById("fontSize").value;
-const color = document.getElementById("textColor").value;
-const strokeWidth = document.getElementById("strokeWidth").value;
+let size=document.getElementById("fontSize").value;
+let color=document.getElementById("textColor").value;
+let stroke=document.getElementById("strokeWidth").value;
 
-ctx.font = `bold ${fontSize}px Impact`;
-ctx.fillStyle = color;
-ctx.strokeStyle = "black";
-ctx.lineWidth = strokeWidth;
-ctx.textAlign = "center";
+ctx.font=`bold ${size}px Impact`;
+ctx.fillStyle=color;
+ctx.strokeStyle="black";
+ctx.lineWidth=stroke;
+ctx.textAlign="center";
 
-ctx.fillText(topText,canvas.width/2,60);
-ctx.strokeText(topText,canvas.width/2,60);
+ctx.fillText(top,canvas.width/2, size+10);
+ctx.strokeText(top,canvas.width/2, size+10);
 
-ctx.fillText(bottomText,canvas.width/2,canvas.height-30);
-ctx.strokeText(bottomText,canvas.width/2,canvas.height-30);
+ctx.fillText(bottom,canvas.width/2,canvas.height-20);
+ctx.strokeText(bottom,canvas.width/2,canvas.height-20);
 
 }
 
-window.downloadMeme = function(){
+function downloadMeme(){
 
-const link = document.createElement("a");
-
-link.download = "meme.png";
-link.href = canvas.toDataURL("image/png");
-
+let link=document.createElement("a");
+link.download="meme.png";
+link.href=canvas.toDataURL();
 link.click();
 
-};
-
-};
+}
 
 </script>
 
