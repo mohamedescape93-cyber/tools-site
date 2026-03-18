@@ -10,11 +10,10 @@ box-sizing:border-box;
 
 body{
 background:#e6e7ea;
-font-family:'Segoe UI', Tahoma, sans-serif;
+font-family:'Poppins', sans-serif;
 margin:0;
 color:#1e293b;
 }
-
 /* ===============================
 HEADER (PROFESSIONAL LAYOUT)
 ================================*/
@@ -292,4 +291,45 @@ margin-top:10px;
 max-width:300px;
 }
 
+}
+/* ===============================
+TOOL DESCRIPTIONS (UPGRADED)
+================================*/
+
+.tool-descriptions{
+max-width:900px;
+margin:80px auto;
+padding:40px;
+text-align:center;
+}
+
+/* MAIN TITLE */
+.tool-descriptions h2{
+font-size:32px;
+margin-bottom:40px;
+font-weight:700;
+color:#0f172a;
+}
+
+/* TOOL TITLE */
+.tool-descriptions h3{
+font-size:20px;
+margin-top:30px;
+margin-bottom:10px;
+font-weight:600;
+color:#1e293b;
+}
+
+/* TEXT */
+.tool-descriptions p{
+font-size:15px;
+line-height:1.8;
+color:#475569;
+max-width:700px;
+margin:0 auto;
+}
+.tool-descriptions{
+background:white;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.05);
 }
