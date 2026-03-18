@@ -17,23 +17,7 @@ color:#1e293b;
 HEADER (PROFESSIONAL LAYOUT)
 ================================*/
 /* ===============================
-HEADER (STABLE VERSION)
-================================*/
-
-/* ===============================
-HEADER (FINAL FIXED VERSION)
-================================*/
-
-/* ===============================
-HEADER (FINAL FIXED VERSION)
-================================*/
-
-/* ===============================
-HEADER (FINAL WORKING VERSION)
-================================*/
-
-/* ===============================
-HEADER (FINAL PERFECT VERSION)
+HEADER (FINAL REAL FIX)
 ================================*/
 
 .site-header{
@@ -41,21 +25,21 @@ background:#020c1b;
 padding:15px 60px;
 display:flex;
 align-items:center;
-justify-content:space-between;
 border-bottom:1px solid #0c2547;
-position:relative;
 }
 
 /* LOGO */
+.logo{
+flex:0 0 auto;
+}
+
 .logo img{
 height:50px;
 }
 
 /* NAV CENTER */
 .nav-menu{
-position:absolute;
-left:50%;
-transform:translateX(-50%);
+margin:0 auto; /* 🔥 THIS IS THE KEY */
 display:flex;
 gap:40px;
 }
@@ -65,11 +49,12 @@ color:#cbd5e1;
 text-decoration:none;
 font-weight:500;
 font-size:16px;
+white-space:nowrap;
 }
 
 /* SEARCH RIGHT */
 .search-box{
-width:260px;
+flex:0 0 260px;
 position:relative;
 }
 
