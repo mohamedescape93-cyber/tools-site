@@ -32,20 +32,18 @@ HEADER (FINAL FIXED VERSION)
 HEADER (FINAL WORKING VERSION)
 ================================*/
 
+/* ===============================
+HEADER (FINAL PERFECT VERSION)
+================================*/
+
 .site-header{
 background:#020c1b;
 padding:15px 60px;
-display:grid;
-grid-template-columns: auto 1fr auto;
-align-items:center;
-border-bottom:1px solid #0c2547;
-}
-
-/* LEFT SIDE (logo + nav container) */
-.header-left{
 display:flex;
 align-items:center;
-gap:40px;
+justify-content:space-between;
+border-bottom:1px solid #0c2547;
+position:relative;
 }
 
 /* LOGO */
@@ -53,24 +51,23 @@ gap:40px;
 height:50px;
 }
 
-/* NAV (CENTERED IN FULL HEADER) */
+/* NAV CENTER */
 .nav-menu{
-position:relative;
+position:absolute;
 left:50%;
 transform:translateX(-50%);
 display:flex;
-gap:30px;
+gap:40px;
 }
 
 .nav-menu a{
 color:#cbd5e1;
 text-decoration:none;
 font-weight:500;
-font-size:15px;
-white-space:nowrap;
+font-size:16px;
 }
 
-/* SEARCH (RIGHT) */
+/* SEARCH RIGHT */
 .search-box{
 width:260px;
 position:relative;
