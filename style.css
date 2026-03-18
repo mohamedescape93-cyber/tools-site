@@ -16,29 +16,31 @@ color:#1e293b;
 /* ===============================
 HEADER (PROFESSIONAL LAYOUT)
 ================================*/
+/* ===============================
+HEADER (STABLE VERSION)
+================================*/
 
 .site-header{
 background:#020c1b;
 padding:15px 60px;
 display:flex;
+  position:relative;
 align-items:center;
+justify-content:space-between;
 border-bottom:1px solid #0c2547;
 }
 
-/* LEFT - LOGO */
-.logo{
-flex:1;
-}
-
+/* LOGO */
 .logo img{
 height:50px;
 }
 
-/* CENTER - NAV */
+/* NAV (PERFECT CENTER) */
 .nav-menu{
-flex:1;
+position:absolute;
+left:50%;
+transform:translateX(-50%);
 display:flex;
-justify-content:center;
 gap:30px;
 }
 
@@ -47,19 +49,12 @@ color:#cbd5e1;
 text-decoration:none;
 font-weight:500;
 font-size:15px;
-transition:0.2s;
+white-space:nowrap;
 }
 
-.nav-menu a:hover{
-color:white;
-}
-
-/* RIGHT - SEARCH */
+/* SEARCH */
 .search-box{
-flex:1;
-display:flex;
-justify-content:flex-end;
-max-width:260px;
+width:260px;
 position:relative;
 }
 
@@ -71,7 +66,6 @@ border-radius:12px;
 border:none;
 background:#0c2547;
 color:white;
-outline:none;
 }
 
 /* ICON */
