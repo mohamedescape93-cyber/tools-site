@@ -20,14 +20,18 @@ HEADER (PROFESSIONAL LAYOUT)
 HEADER (STABLE VERSION)
 ================================*/
 
+/* ===============================
+HEADER (FINAL FIXED VERSION)
+================================*/
+
 .site-header{
 background:#020c1b;
 padding:15px 60px;
 display:flex;
-  position:relative;
 align-items:center;
 justify-content:space-between;
 border-bottom:1px solid #0c2547;
+position:relative;
 }
 
 /* LOGO */
@@ -35,7 +39,7 @@ border-bottom:1px solid #0c2547;
 height:50px;
 }
 
-/* NAV (PERFECT CENTER) */
+/* NAV CENTER */
 .nav-menu{
 position:absolute;
 left:50%;
@@ -52,13 +56,12 @@ font-size:15px;
 white-space:nowrap;
 }
 
-/* SEARCH */
+/* SEARCH RIGHT */
 .search-box{
 width:260px;
 position:relative;
 }
 
-/* INPUT */
 .search-box input{
 width:100%;
 padding:12px 14px 12px 40px;
@@ -68,7 +71,6 @@ background:#0c2547;
 color:white;
 }
 
-/* ICON */
 .search-icon{
 position:absolute;
 left:12px;
