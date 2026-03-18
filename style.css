@@ -452,3 +452,9 @@ color:#cbd5e1;
 border-radius:16px;
 line-height:1.7;
 }
+.tool-descriptions{
+max-width:1000px;
+margin:40px auto;
+padding:0 20px;
+text-align:center;
+}
