@@ -12,6 +12,7 @@ body{
 background:#e6e7ea;
 font-family:'Poppins', sans-serif;
 color:#1e293b;
+line-height:1.5;
 }
 
 /* REMOVE DEFAULT LINK COLORS */
@@ -21,7 +22,7 @@ color:inherit;
 }
 
 /* ===============================
-HEADER (STABLE FLEX SYSTEM)
+HEADER
 ================================*/
 
 .site-header{
@@ -36,11 +37,10 @@ gap:30px;
 /* LOGO */
 .logo img{
 height:50px;
-width:auto;
 display:block;
 }
 
-/* NAVIGATION */
+/* NAV */
 .nav-menu{
 display:flex;
 gap:30px;
@@ -56,7 +56,7 @@ transition:0.2s;
 color:white;
 }
 
-/* SEARCH (ALWAYS RIGHT) */
+/* SEARCH */
 .search-box{
 margin-left:auto;
 width:260px;
@@ -99,7 +99,6 @@ display:block;
 background:white;
 padding:25px;
 border-radius:12px;
-color:#1e293b;
 text-align:center;
 box-shadow:0 6px 18px rgba(0,0,0,0.08);
 transition:0.25s;
@@ -111,7 +110,7 @@ box-shadow:0 12px 25px rgba(0,0,0,0.15);
 }
 
 /* ===============================
-TOOL PAGE BOX
+TOOL PAGE CONTAINER
 ================================*/
 
 .tool-container{
@@ -209,7 +208,7 @@ border-radius:16px;
 }
 
 /* ===============================
-TOOL DESCRIPTIONS (CLEAN)
+TOOL DESCRIPTIONS
 ================================*/
 
 .tool-descriptions{
@@ -234,7 +233,6 @@ font-size:20px;
 margin-top:30px;
 margin-bottom:10px;
 font-weight:600;
-color:#1e293b;
 }
 
 .tool-descriptions p{
@@ -243,6 +241,42 @@ line-height:1.8;
 color:#475569;
 max-width:700px;
 margin:0 auto;
+}
+
+/* ===============================
+MORE TOOLS (FIXED 🔥)
+================================*/
+
+.more-tools{
+max-width:1000px;
+margin:60px auto;
+padding:0 20px;
+text-align:center;
+}
+
+.more-tools h2{
+font-size:24px;
+margin-bottom:20px;
+color:#0f172a;
+}
+
+.more-tools-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:20px;
+}
+
+.more-tool-card{
+display:block;
+background:#071a33;
+color:white;
+padding:20px;
+border-radius:14px;
+transition:0.2s;
+}
+
+.more-tool-card:hover{
+background:#0c2547;
 }
 
 /* ===============================
