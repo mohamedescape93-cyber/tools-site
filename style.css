@@ -420,3 +420,11 @@ letter-spacing:-0.5px;
 font-size:18px;
 color:#64748b;
 }
+.hero{
+margin-top:20px;
+}
+.hero h1{
+background: linear-gradient(90deg,#2563eb,#3a78ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
