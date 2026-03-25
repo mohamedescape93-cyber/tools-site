@@ -235,7 +235,103 @@ This tool combines multiple PDF files into one document while preserving origina
 </footer>
 
 <script>
-// YOUR ORIGINAL JS (UNCHANGED)
+
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("file-input");
+const preview = document.getElementById("preview");
+
+let files = [];
+
+dropArea.onclick = () => fileInput.click();
+
+dropArea.addEventListener("dragover", e=>e.preventDefault());
+
+dropArea.addEventListener("drop", e=>{
+e.preventDefault();
+handleFiles(e.dataTransfer.files);
+});
+
+fileInput.addEventListener("change", ()=>handleFiles(fileInput.files));
+
+function handleFiles(newFiles){
+
+for(let file of newFiles){
+if(file.type !== "application/pdf") continue;
+files.push(file);
+}
+
+renderPreview();
+
+}
+
+function renderPreview(){
+
+preview.innerHTML="";
+
+files.forEach((file,index)=>{
+
+const div=document.createElement("div");
+
+div.className="preview-item";
+
+div.innerHTML=`
+📄 ${file.name}
+<br><br>
+<button class="move-btn" onclick="moveUp(${index})">↑</button>
+<button class="move-btn" onclick="moveDown(${index})">↓</button>
+`;
+
+preview.appendChild(div);
+
+});
+
+}
+
+function moveUp(index){
+if(index===0) return;
+[files[index-1],files[index]]=[files[index],files[index-1]];
+renderPreview();
+}
+
+function moveDown(index){
+if(index===files.length-1) return;
+[files[index+1],files[index]]=[files[index],files[index+1]];
+renderPreview();
+}
+
+async function mergePDF(){
+
+if(files.length===0){
+alert("Upload PDFs first");
+return;
+}
+
+const { PDFDocument } = PDFLib;
+const mergedPDF = await PDFDocument.create();
+
+for(const file of files){
+
+const bytes = await file.arrayBuffer();
+const pdf = await PDFDocument.load(bytes);
+
+const pages = await mergedPDF.copyPages(pdf,pdf.getPageIndices());
+pages.forEach(p => mergedPDF.addPage(p));
+
+}
+
+const pdfBytes = await mergedPDF.save();
+
+const blob = new Blob([pdfBytes],{type:"application/pdf"});
+
+const link = document.getElementById("downloadLink");
+
+link.href = URL.createObjectURL(blob);
+link.download = "merged.pdf";
+link.innerText = "Download PDF";
+link.className = "main-button";
+
+}
+
 </script>
 
 </body>
