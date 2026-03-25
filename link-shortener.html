@@ -265,7 +265,68 @@ This tool converts long URLs into short, easy-to-share links that are ideal for 
 <div id="toast">Copied!</div>
 
 <script>
-// YOUR ORIGINAL JS (UNCHANGED)
+async function shorten(){
+
+let url=document.getElementById("url").value.trim();
+let button=document.getElementById("shortenBtn");
+let result=document.getElementById("result");
+
+if(!url){
+alert("Enter a URL");
+return;
+}
+
+if(!url.startsWith("http://") && !url.startsWith("https://")){
+url="https://" + url;
+}
+
+try{
+new URL(url);
+}catch{
+alert("Invalid URL");
+return;
+}
+
+button.innerText="Shortening...";
+button.disabled=true;
+
+try{
+
+let response=await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(url));
+let shortUrl=await response.text();
+
+result.value=shortUrl;
+
+}catch{
+
+alert("Error shortening link");
+
+}
+
+button.innerText="Shorten Link";
+button.disabled=false;
+
+}
+
+function copyLink(){
+
+let result=document.getElementById("result");
+
+if(!result.value) return;
+
+navigator.clipboard.writeText(result.value);
+showToast();
+
+}
+
+function showToast(){
+
+let toast=document.getElementById("toast");
+toast.className="show";
+
+setTimeout(()=>toast.className="",2000);
+
+}
 </script>
 
 </body>
