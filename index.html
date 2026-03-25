@@ -51,7 +51,57 @@
 <h1>Free Online Conversion Tools & More</h1>
 
 <p>Convert files instantly — No downloads. No signup.</p>
+<div class="quick-converter">
 
+<div class="converter-card">
+
+<label class="upload-area">
+<input type="file" id="fileInput">
+📁 Select File
+</label>
+
+<div class="format-row">
+
+<select id="fromFormat">
+<option value="">From</option>
+<option value="pdf">PDF</option>
+<option value="jpg">JPG</option>
+<option value="png">PNG</option>
+<option value="mp3">MP3</option>
+<option value="wav">WAV</option>
+</select>
+
+<span style="color:white;">→</span>
+
+<select id="toFormat">
+<option value="">To</option>
+</select>
+
+<button id="convertBtn">Convert</button>
+
+</div>
+
+<div id="statusText" style="margin-top:10px;color:#94a3b8;"></div>
+
+<div id="progressBar" style="
+display:none;
+height:6px;
+background:#0c2547;
+margin-top:10px;
+border-radius:6px;
+">
+<div id="progressFill" style="
+height:100%;
+width:0%;
+background:#3a78ff;
+"></div>
+</div>
+
+<div id="downloadArea"></div>
+
+</div>
+
+</div>
 </div>
 
 <!-- TOOLS GRID -->
@@ -294,30 +344,171 @@ All tools run locally in your browser for maximum privacy and performance.
 
 <script>
 
-// 🔥 FORCE PAGE TO TOP (smooth behavior)
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
-
-window.onload = function() {
-  window.scrollTo({
-    top: 0,
-    behavior: "instant"
-  });
+// ===== FORMAT LOGIC =====
+const formatMap = {
+pdf: ["docx","jpg","png"],
+docx: ["pdf"],
+jpg: ["png","webp","pdf"],
+png: ["jpg","webp","pdf"],
+mp3: ["wav"],
+wav: ["mp3"]
 };
 
+const fromSelect = document.getElementById("fromFormat");
+const toSelect = document.getElementById("toFormat");
 
-// 🔍 SEARCH FUNCTION
+fromSelect.addEventListener("change", () => {
+const from = fromSelect.value;
+
+toSelect.innerHTML = '<option value="">To</option>';
+
+if(!formatMap[from]) return;
+
+formatMap[from].forEach(f => {
+const opt = document.createElement("option");
+opt.value = f;
+opt.textContent = f.toUpperCase();
+toSelect.appendChild(opt);
+});
+});
+
+// AUTO DETECT FILE
+document.getElementById("fileInput").addEventListener("change", (e)=>{
+const file = e.target.files[0];
+if(!file) return;
+
+const ext = file.name.split(".").pop().toLowerCase();
+
+if(formatMap[ext]){
+fromSelect.value = ext;
+fromSelect.dispatchEvent(new Event("change"));
+}
+});
+
+// PROGRESS
+function setProgress(p){
+document.getElementById("progressBar").style.display = "block";
+document.getElementById("progressFill").style.width = p + "%";
+}
+
+// CONVERT
+document.getElementById("convertBtn").addEventListener("click", async ()=>{
+
+const file = document.getElementById("fileInput").files[0];
+const toFormat = toSelect.value;
+
+if(!file){
+alert("Select file");
+return;
+}
+
+if(!toFormat){
+alert("Select output format");
+return;
+}
+
+const apiKey = "PASTE_YOUR_REAL_API_KEY";
+
+document.getElementById("statusText").innerText = "Uploading...";
+document.getElementById("downloadArea").innerHTML = "";
+
+try{
+
+setProgress(20);
+
+// CREATE JOB
+const job = await fetch("https://api.cloudconvert.com/v2/jobs",{
+method:"POST",
+headers:{
+"Authorization":"Bearer "+apiKey,
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+tasks:{
+"upload-file":{operation:"import/upload"},
+"convert-file":{
+operation:"convert",
+input:"upload-file",
+output_format:toFormat
+},
+"export-file":{
+operation:"export/url",
+input:"convert-file"
+}
+}
+})
+});
+
+const data = await job.json();
+
+if(!data.data){
+throw new Error("API failed");
+}
+
+// UPLOAD FILE
+const uploadTask = data.data.tasks.find(t=>t.name==="upload-file");
+
+const formData = new FormData();
+
+Object.entries(uploadTask.result.form.parameters).forEach(([k,v])=>{
+formData.append(k,v);
+});
+
+formData.append("file",file);
+
+await fetch(uploadTask.result.form.url,{
+method:"POST",
+body:formData
+});
+
+document.getElementById("statusText").innerText = "Processing...";
+setProgress(60);
+
+let url = null;
+
+while(!url){
+await new Promise(r=>setTimeout(r,2000));
+
+const check = await fetch(`https://api.cloudconvert.com/v2/jobs/${data.data.id}`,{
+headers:{ "Authorization":"Bearer "+apiKey }
+});
+
+const result = await check.json();
+
+const exportTask = result.data.tasks.find(t=>t.name==="export-file");
+
+if(exportTask && exportTask.status==="finished"){
+url = exportTask.result.files[0].url;
+}
+
+setProgress(85);
+}
+
+setProgress(100);
+
+document.getElementById("statusText").innerText = "Done ✅";
+
+document.getElementById("downloadArea").innerHTML = `
+<a href="${url}" target="_blank" class="convert-btn">
+⬇ Download File
+</a>
+`;
+
+}catch(e){
+console.error(e);
+document.getElementById("statusText").innerText = "Error converting file";
+}
+
+});
+
+// SEARCH (KEEP YOUR FUNCTION)
 function searchTools(){
-
 let input = document.getElementById("toolSearch").value.toLowerCase();
 let cards = document.querySelectorAll(".tool-card");
 
-cards.forEach(card => {
-let text = card.innerText.toLowerCase();
-card.style.display = text.includes(input) ? "block" : "none";
+cards.forEach(card=>{
+card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
 });
-
 }
 
 </script>
