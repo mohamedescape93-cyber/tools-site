@@ -297,7 +297,9 @@ cards.forEach(card => {
 let text = card.innerText.toLowerCase();
 card.style.display = text.includes(input) ? "block" : "none";
 });
-
+window.onload = function() {
+  window.scrollTo(0, 0);
+};
 }
 
 </script>
