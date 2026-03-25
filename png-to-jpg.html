@@ -479,10 +479,10 @@ preview.innerHTML="";
 
 let files=fileInput.files;
 
-for(let file of files){
+for(let i=0;i<files.length;i++){
 
 let img=document.createElement("img");
-img.src=URL.createObjectURL(file);
+img.src=URL.createObjectURL(files[i]);
 preview.appendChild(img);
 
 }
@@ -493,6 +493,7 @@ function convert(){
 
 let files=fileInput.files;
 let downloads=document.getElementById("downloads");
+
 downloads.innerHTML="";
 
 for(let i=0;i<files.length;i++){
@@ -513,9 +514,14 @@ canvas.width=img.width;
 canvas.height=img.height;
 
 let ctx=canvas.getContext("2d");
+
+/* FIX: white background for PNG transparency */
+ctx.fillStyle="#ffffff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
 ctx.drawImage(img,0,0);
 
-let jpg=canvas.toDataURL("image/jpeg",0.9);
+let jpg=canvas.toDataURL("image/jpeg",0.95);
 
 let link=document.createElement("a");
 link.href=jpg;
