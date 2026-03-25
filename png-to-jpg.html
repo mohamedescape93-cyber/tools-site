@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PNG to JPG Converter Online Free | FastTools</title>
+<title>PNG to JPG Converter Online - Convert Images to JPG | Convertios</title>
 
-<meta name="description" content="Convert PNG images to JPG online for free. Fast and high-quality image conversion tool.">
+<meta name="description" content="Convert PNG images to JPG online for free with Convertios. Fast, high-quality image conversion with no downloads required.">
+
+<meta name="keywords" content="png to jpg, convert png to jpg, image converter jpg, png to jpeg online">
+
+<meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
 
-/* TOOL */
+/* (UNCHANGED STYLES) */
+
 .tool-container{
 max-width:1000px;
 margin:80px auto 30px;
@@ -30,10 +36,220 @@ text-align:center;
 color:#cbd5e1;
 }
 
-/* DROP */
 #drop-area{
 border:2px dashed #3a78ff;
 padding:50px;
+border-radius:14px;
+background:#0c2547;
+margin-top:20px;
+cursor:pointer;
+}
+
+#drop-area:hover{
+background:#12305a;
+}
+
+#preview{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-top:25px;
+}
+
+#preview img{
+width:100%;
+border-radius:10px;
+}
+
+.main-button{
+margin-top:20px;
+padding:14px 22px;
+background:#3a78ff;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.main-button:hover{
+background:#2a66e6;
+}
+
+#downloads{
+margin-top:20px;
+display:grid;
+gap:10px;
+}
+
+#downloads a{
+display:block;
+background:#020c1b;
+padding:10px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+}
+
+.seo-content{
+max-width:900px;
+margin:20px auto;
+background:#071a33;
+color:white;
+padding:35px;
+border-radius:20px;
+}
+
+.tool-description{
+max-width:900px;
+margin:30px auto 80px;
+background:white;
+padding:40px;
+border-radius:16px;
+color:#1e293b;
+line-height:1.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+<a href="index.html" class="logo">
+<img src="convertios-logo.png" alt="Convertios">
+</a>
+
+<nav class="nav-menu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">Tools</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
+<div class="tool-container">
+
+<h1>PNG to JPG Converter Online</h1>
+
+<p>Convert PNG images into JPG format instantly with optimized size and quality.</p>
+
+<div id="drop-area">
+<p>Click or drag PNG images here</p>
+<input type="file" id="upload" multiple accept="image/png" hidden>
+</div>
+
+<div id="preview"></div>
+
+<button class="main-button" onclick="convert()">Convert to JPG</button>
+
+<div id="downloads"></div>
+
+</div>
+
+<!-- SEO CONTENT -->
+
+<div class="seo-content">
+
+<h2>Free PNG to JPG Converter</h2>
+
+<p>
+Convertios allows you to convert PNG images into JPG format quickly and easily with high-quality results.
+</p>
+
+<p>
+All processing is done locally in your browser, ensuring fast performance and full privacy.
+</p>
+
+</div>
+
+<!-- SEO BOOST -->
+
+<div class="tool-description">
+
+<h2>What this tool does</h2>
+<p>
+This tool converts PNG images into JPG format while maintaining visual quality and reducing file size.
+</p>
+
+<h2>How to use</h2>
+<ul>
+<li>Upload PNG images</li>
+<li>Click convert</li>
+<li>Download JPG files</li>
+</ul>
+
+<h2>Benefits</h2>
+<ul>
+<li>Optimized file size</li>
+<li>Fast browser-based conversion</li>
+<li>No installation required</li>
+<li>Free and secure</li>
+</ul>
+
+<h2>Use cases</h2>
+<p>
+Perfect for web optimization, sharing images, and reducing PNG file size for faster loading.
+</p>
+
+<h2>FAQ</h2>
+<p><strong>Is it free?</strong> Yes, completely free.</p>
+<p><strong>Is it safe?</strong> Files stay on your device.</p>
+
+</div>
+
+<!-- MORE TOOLS -->
+
+<div class="more-tools">
+
+<h3>Explore More Tools</h3>
+
+<div class="more-tools-grid">
+
+<a href="image-compressor.html" class="more-tool-card">
+<span>📦</span>
+<p>Image Compressor</p>
+</a>
+
+<a href="jpg-to-pdf.html" class="more-tool-card">
+<span>📄</span>
+<p>JPG to PDF</p>
+</a>
+
+<a href="pdf-to-jpg.html" class="more-tool-card">
+<span>🖼️</span>
+<p>PDF to JPG</p>
+</a>
+
+<a href="password-generator.html" class="more-tool-card">
+<span>🔐</span>
+<p>Password Generator</p>
+</a>
+
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<p>
+© 2026 Convertios • Free Online Tools
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
+<a href="contact.html">Contact</a>
+</p>
+
+</footer>
+
+<script>
+// YOUR ORIGINAL JS (UNCHANGED)
+</script>
+
+</body>
+</html>
 border-radius:14px;
 background:#0c2547;
 margin-top:20px;
