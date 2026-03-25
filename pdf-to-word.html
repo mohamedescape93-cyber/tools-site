@@ -367,22 +367,28 @@ return;
 
 const ext = file.name.split(".").pop().toLowerCase();
 
-// ✅ IMAGE = LOCAL (NO API)
+// ===== IMAGE → LOCAL =====
 if(["jpg","jpeg","png","webp"].includes(ext)){
 convertImageLocal();
 return;
 }
 
-// ✅ PDF = API
+// ===== PDF → REDIRECT =====
 if(ext === "pdf"){
-convertPDF();
+window.location.href = "pdf-to-word.html";
 return;
 }
 
-alert("This format is not supported yet");
-
+// ===== AUDIO → REDIRECT =====
+if(["mp3","wav"].includes(ext)){
+window.location.href = "audio-converter.html";
+return;
 }
 
+// ===== DEFAULT =====
+alert("This file type is not supported yet");
+
+}
 /* ===============================
 🖼 IMAGE CONVERT (LOCAL)
 ================================*/
