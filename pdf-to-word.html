@@ -319,6 +319,120 @@ function convertPDF(){
 }
 
 </script>
+  <script>
+
+/* ===============================
+FILE HANDLING
+================================*/
+
+let file = null;
+
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("upload");
+const preview = document.getElementById("preview");
+
+dropArea.onclick = () => fileInput.click();
+
+dropArea.addEventListener("dragover", e => e.preventDefault());
+
+dropArea.addEventListener("drop", e => {
+e.preventDefault();
+file = e.dataTransfer.files[0];
+showPreview();
+});
+
+fileInput.addEventListener("change", () => {
+file = fileInput.files[0];
+showPreview();
+});
+
+function showPreview(){
+if(!file) return;
+
+preview.innerHTML = `
+📄 ${file.name}<br>
+Size: ${(file.size/1024/1024).toFixed(2)} MB
+`;
+}
+
+/* ===============================
+🚀 MAIN CONVERT FUNCTION
+================================*/
+
+async function convertPDF(){
+
+if(!file){
+alert("Upload a PDF first");
+return;
+}
+
+const bar = document.getElementById("progress-bar");
+const status = document.getElementById("status");
+
+status.innerText = "Uploading...";
+bar.style.width = "20%";
+
+/* =========================================
+🚀 👉 PLACE YOUR API HERE (IMPORTANT)
+
+Replace everything below with your API logic
+
+Example flow:
+1. Send file to API
+2. Wait for conversion
+3. Receive download link
+4. Show link to user
+
+========================================= */
+
+try{
+
+// 1️⃣ Prepare file
+const formData = new FormData();
+formData.append("file", file);
+
+// 2️⃣ SEND TO API
+// 🔴 REPLACE THIS URL WITH YOUR REAL API
+const response = await fetch("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTUzZmJiNGFlNGRmNzFmNDY3MzY4YTU5YjE2ZTkxNDQyYWZiMjc5YTQwNzA3MDIyNjBmMWU0NGI1MGVkZTFiYjE3MTk3ZjgzYzhhYWNhOTYiLCJpYXQiOjE3NzM3MzA0MTAuMDcyOTM0LCJuYmYiOjE3NzM3MzA0MTAuMDcyOTM2LCJleHAiOjQ5Mjk0MDQwMTAuMDY2MjgsInN1YiI6Ijc0NjM4MTYxIiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiXX0.pQ2Mz5C2n9XxlzrNJDySda2Cc2TxddO4dsiPmthWD1Xef1A1NFyPuoztXqv6h4awJ0TAdqNei5oRipFyKSNeADLx6vseOQYfn-uzFRbzByxlEwE5g-WEB3yDsP_X4KTbG8DXGD657HmGCGFyqsgfgmMY9AJXlIeFyLZvOaUBgMdubrAUZf6sm-0UG-TrIcMVFlbFhBMedRxPnnjoPoTlEYTBsZBDNy-PRWksY76GOxAiHAgeYifXFiWXi6-B1oY4zPzQ5hihXGhZeHpibLf2aDy9jyFSbZY0E0NFt_A64w7zlELPAfHl6x09bxf_4ci8jGPHgMm1Q_9t040atxLThQ1fvmCH0whF_pTPqwD_iQdGvaTYPL7y3rrn4GmqmmNT4HwmHhfPl5I4Z5HzoP_pnuczB8IetjUkyGcicgek5TFE3NIRKeOAMGan0p6DMJ41nIXpL85CeHxeCo5HNvN7CQbqEh7yw04EDEFFooUTGtel9sEQvbEb8u5bvO__j0-rPO67zCRIaWLsikQrMS_natooRoXmYZKp7t1IGNLQqoM6HdYFr7l8qr0apSt2KP57zwrIpKKjeN2RV3VfPRjmwwVcQ1jv33YryFabh4sZ2osvEixBgyuqPCgWSPuAj7mOEGxfHUTHtmIRC_39iPmOV8omgais4cwziNA1YKZlf9I", {
+method: "POST",
+body: formData
+});
+
+bar.style.width = "60%";
+status.innerText = "Converting...";
+
+// 3️⃣ GET RESULT
+const result = await response.json();
+
+/*
+Expected response format:
+{
+  file_url: "https://yourfile.docx"
+}
+*/
+
+bar.style.width = "100%";
+status.innerText = "Done!";
+
+// 4️⃣ SHOW DOWNLOAD
+document.getElementById("downloads").innerHTML = `
+<a href="${result.file_url}" class="download-btn" target="_blank">
+Download Word File
+</a>
+`;
+
+}catch(error){
+
+console.error(error);
+status.innerText = "Conversion failed";
+
+}
+
+}
+
+</script>
+
+
 </script>
 
 </body>
