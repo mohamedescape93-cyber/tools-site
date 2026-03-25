@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="favicon.png">
 
-<!-- FFmpeg -->
-<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.10.0/dist/ffmpeg.min.js"></script>
 </head>
 
 <body>
@@ -39,7 +37,7 @@
 <h1>MP4 to MP3 Converter</h1>
 
 <p>
-Extract audio from MP4 video files instantly in your browser.
+Extract audio from MP4 video files instantly.
 </p>
 
 <input type="file" id="videoFile" accept="video/mp4">
@@ -47,9 +45,7 @@ Extract audio from MP4 video files instantly in your browser.
 <video id="preview" controls style="margin-top:20px;width:100%;border-radius:10px;"></video>
 
 <div class="controls">
-
 <button onclick="convertVideo()">Convert to MP3</button>
-
 </div>
 
 <div id="downloadArea"></div>
@@ -59,29 +55,20 @@ Extract audio from MP4 video files instantly in your browser.
 <!-- SEO CONTENT -->
 
 <div class="seo-content">
-
 <h2>Free MP4 to MP3 Converter</h2>
-
 <p>
-Convert video files into MP3 audio instantly without uploading files.
-Everything runs locally in your browser for maximum privacy.
+Convert video files into MP3 audio instantly using powerful cloud conversion.
 </p>
-
 </div>
 
-<!-- DESCRIPTION -->
-
 <div class="tool-description">
-
 <h2>How it works</h2>
 <p>
-Upload your MP4 file, click convert, and download the extracted audio instantly.
+Upload your MP4 file, click convert, and download the extracted audio.
 </p>
-
 </div>
 
 <footer class="site-footer">
-
 <p>
 © 2026 Convertios • Free Online Tools
 <br>
@@ -89,25 +76,20 @@ Upload your MP4 file, click convert, and download the extracted audio instantly.
 <a href="terms.html">Terms</a> •
 <a href="contact.html">Contact</a>
 </p>
-
 </footer>
 
 <script>
 
-const { createFFmpeg, fetchFile } = FFmpeg;
-  const ffmpeg = createFFmpeg({ log: true });
+const API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTUzZmJiNGFlNGRmNzFmNDY3MzY4YTU5YjE2ZTkxNDQyYWZiMjc5YTQwNzA3MDIyNjBmMWU0NGI1MGVkZTFiYjE3MTk3ZjgzYzhhYWNhOTYiLCJpYXQiOjE3NzM3MzA0MTAuMDcyOTM0LCJuYmYiOjE3NzM3MzA0MTAuMDcyOTM2LCJleHAiOjQ5Mjk0MDQwMTAuMDY2MjgsInN1YiI6Ijc0NjM4MTYxIiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiXX0.pQ2Mz5C2n9XxlzrNJDySda2Cc2TxddO4dsiPmthWD1Xef1A1NFyPuoztXqv6h4awJ0TAdqNei5oRipFyKSNeADLx6vseOQYfn-uzFRbzByxlEwE5g-WEB3yDsP_X4KTbG8DXGD657HmGCGFyqsgfgmMY9AJXlIeFyLZvOaUBgMdubrAUZf6sm-0UG-TrIcMVFlbFhBMedRxPnnjoPoTlEYTBsZBDNy-PRWksY76GOxAiHAgeYifXFiWXi6-B1oY4zPzQ5hihXGhZeHpibLf2aDy9jyFSbZY0E0NFt_A64w7zlELPAfHl6x09bxf_4ci8jGPHgMm1Q_9t040atxLThQ1fvmCH0whF_pTPqwD_iQdGvaTYPL7y3rrn4GmqmmNT4HwmHhfPl5I4Z5HzoP_pnuczB8IetjUkyGcicgek5TFE3NIRKeOAMGan0p6DMJ41nIXpL85CeHxeCo5HNvN7CQbqEh7yw04EDEFFooUTGtel9sEQvbEb8u5bvO__j0-rPO67zCRIaWLsikQrMS_natooRoXmYZKp7t1IGNLQqoM6HdYFr7l8qr0apSt2KP57zwrIpKKjeN2RV3VfPRjmwwVcQ1jv33YryFabh4sZ2osvEixBgyuqPCgWSPuAj7mOEGxfHUTHtmIRC_39iPmOV8omgais4cwziNA1YKZlf9I"; // 🔥 ADD HERE
 
 const fileInput = document.getElementById("videoFile");
 const preview = document.getElementById("preview");
 const downloadArea = document.getElementById("downloadArea");
 
 fileInput.addEventListener("change", function(){
-
-const file = this.files[0];
-if(!file) return;
-
-preview.src = URL.createObjectURL(file);
-
+  const file = this.files[0];
+  if(!file) return;
+  preview.src = URL.createObjectURL(file);
 });
 
 async function convertVideo(){
@@ -119,25 +101,91 @@ alert("Please upload an MP4 file");
 return;
 }
 
-downloadArea.innerHTML = "Processing... (first time may take few seconds)";
+downloadArea.innerHTML = "Uploading & converting...";
 
-if(!ffmpeg.isLoaded()){
-await ffmpeg.load();
+try {
+
+/// 1️⃣ CREATE JOB
+const jobResponse = await fetch("https://api.cloudconvert.com/v2/jobs", {
+method: "POST",
+headers: {
+"Authorization": "Bearer " + API_KEY,
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+tasks: {
+import: {
+operation: "import/upload"
+},
+convert: {
+operation: "convert",
+input: "import",
+input_format: "mp4",
+output_format: "mp3"
+},
+export: {
+operation: "export/url",
+input: "convert"
+}
+}
+})
+});
+
+const jobData = await jobResponse.json();
+const uploadTask = jobData.data.tasks.find(t => t.name === "import");
+
+
+/// 2️⃣ UPLOAD FILE
+const formData = new FormData();
+
+Object.entries(uploadTask.result.form.parameters).forEach(([key, value]) => {
+formData.append(key, value);
+});
+
+formData.append("file", file);
+
+await fetch(uploadTask.result.form.url, {
+method: "POST",
+body: formData
+});
+
+
+/// 3️⃣ WAIT FOR CONVERSION
+let finished = false;
+let fileUrl = "";
+
+while(!finished){
+
+await new Promise(r => setTimeout(r, 2000));
+
+const statusResponse = await fetch(`https://api.cloudconvert.com/v2/jobs/${jobData.data.id}`, {
+headers: {
+"Authorization": "Bearer " + API_KEY
+}
+});
+
+const statusData = await statusResponse.json();
+
+const exportTask = statusData.data.tasks.find(t => t.name === "export");
+
+if(exportTask.status === "finished"){
+fileUrl = exportTask.result.files[0].url;
+finished = true;
 }
 
-ffmpeg.FS("writeFile","input.mp4", await fetchFile(file));
+}
 
-await ffmpeg.run("-i","input.mp4","output.mp3");
-
-const data = ffmpeg.FS("readFile","output.mp3");
-
-const url = URL.createObjectURL(new Blob([data.buffer], { type: "audio/mp3" }));
-
+/// 4️⃣ DOWNLOAD
 downloadArea.innerHTML = `
-<a href="${url}" download="audio.mp3" class="download-btn">
+<a href="${fileUrl}" target="_blank" class="download-btn">
 Download MP3
 </a>
 `;
+
+} catch(err){
+console.error(err);
+downloadArea.innerHTML = "Error converting file.";
+}
 
 }
 
