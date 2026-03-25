@@ -248,136 +248,79 @@ Perfect for editing documents, converting reports, and working with PDF content 
 
 
   
-  
 <script>
-
-/* ===============================
-FILE HANDLING
-================================*/
 
 let file = null;
 
 const fileInput = document.getElementById("upload");
-  const status = document.getElementById("statusText");
-const progressFill = document.getElementById("progressFill");
-const downloadArea = document.getElementById("downloadArea");
-
-// SELECT FILE
-fileInput.addEventListener("change", (e)=>{
-file = e.target.files[0];
-
-if(file){
-status.innerText = file.name;
-}
-});
-
-/* ===============================
-FORMAT LOGIC
-================================*/
-
-const formatMap = {
-jpg: ["png","webp"],
-png: ["jpg","webp"],
-webp: ["jpg","png"]
-};
-
-const fromSelect = document.getElementById("fromFormat");
-const toSelect = document.getElementById("toFormat");
-
-// UPDATE "TO"
-fromSelect.addEventListener("change", ()=>{
-const from = fromSelect.value;
-
-toSelect.innerHTML = '<option value="">To</option>';
-
-if(!formatMap[from]) return;
-
-formatMap[from].forEach(f=>{
-const opt = document.createElement("option");
-opt.value = f;
-opt.textContent = f.toUpperCase();
-toSelect.appendChild(opt);
-});
-});
-
-/* ===============================
-CONVERT IMAGE (LOCAL)
-================================*/
-
-function convert(){
-
-if(!file){
-alert("Select a file first");
-return;
-}
-
-const toFormat = toSelect.value;
-
-if(!toFormat){
-alert("Select output format");
-return;
-}
-
-progressFill.style.width = "20%";
-status.innerText = "Processing...";
-
-const img = new Image();
-const reader = new FileReader();
-
-reader.onload = function(e){
-img.src = e.target.result;
-};
-
-reader.readAsDataURL(file);
-
-img.onload = function(){
-
-const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = img.width;
-canvas.height = img.height;
-
-ctx.drawImage(img, 0, 0);
-
-progressFill.style.width = "70%";
-
-const mimeMap = {
-jpg: "image/jpeg",
-png: "image/png",
-webp: "image/webp"
-};
-
-canvas.toBlob(function(blob){
-
-const url = URL.createObjectURL(blob);
-
-progressFill.style.width = "100%";
-status.innerText = "Done ✅";
-
-downloadArea.innerHTML = `
-<a href="${url}" download="converted.${toFormat}" class="convert-btn">
-⬇ Download ${toFormat.toUpperCase()}
-</a>
-`;
-
-}, mimeMap[toFormat], 0.95);
-
-};
-
-}
 const dropArea = document.getElementById("drop-area");
+const preview = document.getElementById("preview");
+const status = document.getElementById("status");
+const progressBar = document.getElementById("progress-bar");
+const downloads = document.getElementById("downloads");
 
+// CLICK TO UPLOAD
 dropArea.onclick = () => fileInput.click();
 
+// DRAG OVER
 dropArea.addEventListener("dragover", e => e.preventDefault());
 
+// DROP FILE
 dropArea.addEventListener("drop", e => {
 e.preventDefault();
 fileInput.files = e.dataTransfer.files;
-file = fileInput.files[0];
-status.innerText = file.name;
+handleFile();
 });
+
+// FILE SELECT
+fileInput.addEventListener("change", handleFile);
+
+function handleFile(){
+file = fileInput.files[0];
+
+if(!file) return;
+
+preview.innerHTML = `
+📄 ${file.name}<br>
+Size: ${(file.size/1024/1024).toFixed(2)} MB
+`;
+}
+
+// MAIN BUTTON
+function convert(){
+
+if(!file){
+alert("Upload PDF first");
+return;
+}
+
+// RESET UI
+progressBar.style.width = "20%";
+status.innerText = "Uploading...";
+downloads.innerHTML = "";
+
+// SIMULATED PROGRESS (until you add API)
+setTimeout(()=>{
+progressBar.style.width = "50%";
+status.innerText = "Processing...";
+}, 1000);
+
+setTimeout(()=>{
+progressBar.style.width = "100%";
+status.innerText = "Ready";
+
+// TEMP MESSAGE
+downloads.innerHTML = `
+<div style="margin-top:15px; color:#94a3b8;">
+PDF to Word conversion requires server processing.<br>
+This tool will be enabled soon.
+</div>
+`;
+
+}, 2500);
+
+}
+
 </script>
 </body>
 </html>
