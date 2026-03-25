@@ -36,10 +36,8 @@ gap:30px;
 
 /* LOGO */
 .logo img{
-height:50px;
-display:block;
+height:45px;
 }
-
 /* NAV */
 .nav-menu{
 display:flex;
