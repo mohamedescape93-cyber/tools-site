@@ -210,7 +210,98 @@ This tool allows you to modify the speed of audio files easily. You can make aud
 </footer>
 
 <script>
-// YOUR ORIGINAL JS (UNCHANGED)
+
+let audioContext
+let audioBuffer
+let currentFile
+
+const audioFile = document.getElementById("audioFile")
+const preview = document.getElementById("audioPreview")
+const slider = document.getElementById("speedSlider")
+const speedValue = document.getElementById("speedValue")
+
+slider.addEventListener("input",function(){
+speedValue.innerText = slider.value + "x"
+preview.playbackRate = slider.value
+})
+
+audioFile.addEventListener("change", async function(){
+
+currentFile = this.files[0]
+if(!currentFile) return
+
+preview.src = URL.createObjectURL(currentFile)
+
+audioContext = new AudioContext()
+
+const arrayBuffer = await currentFile.arrayBuffer()
+audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
+
+})
+
+async function exportAudio(){
+
+if(!audioBuffer) return
+
+const speed = parseFloat(slider.value)
+
+const offline = new OfflineAudioContext(
+audioBuffer.numberOfChannels,
+audioBuffer.length / speed,
+audioBuffer.sampleRate
+)
+
+const source = offline.createBufferSource()
+source.buffer = audioBuffer
+source.playbackRate.value = speed
+
+source.connect(offline.destination)
+source.start()
+
+const renderedBuffer = await offline.startRendering()
+
+const samples = renderedBuffer.getChannelData(0)
+
+const mp3encoder = new lamejs.Mp3Encoder(1, renderedBuffer.sampleRate, 192)
+
+const sampleBlockSize = 1152
+let mp3Data = []
+
+for(let i=0;i<samples.length;i+=sampleBlockSize){
+
+let chunk = samples.subarray(i,i+sampleBlockSize)
+
+let int16 = new Int16Array(chunk.length)
+
+for(let j=0;j<chunk.length;j++){
+int16[j] = chunk[j] * 32767
+}
+
+let mp3buf = mp3encoder.encodeBuffer(int16)
+
+if(mp3buf.length>0){
+mp3Data.push(mp3buf)
+}
+
+}
+
+let mp3buf = mp3encoder.flush()
+
+if(mp3buf.length>0){
+mp3Data.push(mp3buf)
+}
+
+const blob = new Blob(mp3Data,{type:'audio/mp3'})
+
+const url = URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = "speed_changed.mp3"
+a.click()
+
+}
+
 </script>
 
 </body>
