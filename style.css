@@ -515,3 +515,8 @@ cursor:pointer;
 text-align:center;
 margin:40px 0 20px;
 }
+ul {
+    text-align: left;
+    display: inline-block;
+    margin-top: 15px;
+}
