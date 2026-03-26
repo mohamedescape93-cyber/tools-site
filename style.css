@@ -238,10 +238,7 @@ line-height:1.8;
     text-align: left;
 }
 
-.tool-descriptions li{
-    margin: 10px 0;
-    color: #475569;
-}
+
 
 .tool-descriptions li::before{
     content: "•";
