@@ -32,9 +32,8 @@ color:inherit;
 
 /* LOGO */
 .logo{
-    flex: 1;
+    flex: 0; /* was 1 → this is the problem */
 }
-
 .logo img{
     height:45px;
     display:block;
