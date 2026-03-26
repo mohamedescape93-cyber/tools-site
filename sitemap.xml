@@ -1,160 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://convertios.com/</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>1.0</priority>
-  </url>
+<url>
+<loc>https://convertios.com/</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/image-converter.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
+<url>
+<loc>https://convertios.com/png-to-jpg.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/compress-image.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
+<url>
+<loc>https://convertios.com/pdf-to-jpg.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/image-resizer.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
+<url>
+<loc>https://convertios.com/jpg-to-pdf.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/png-to-jpg.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://convertios.com/image-converter.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/jpg-to-png.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://convertios.com/compress-image.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/webp-to-png.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
+<url>
+<loc>https://convertios.com/audio-converter.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/jpg-to-pdf.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://convertios.com/mp3-cutter.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/pdf-to-jpg.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://convertios.com/about.html</loc>
+</url>
 
-  <url>
-    <loc>https://convertios.com/merge-pdf.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/split-pdf.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/rotate-pdf.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/qr-generator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/password-generator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/word-counter.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/text-formatter.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/unit-converter.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/link-shortener.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/meme-generator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/audio-converter.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/audio-speed-changer.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/mp3-cutter.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/about.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/contact.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/privacy.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://convertios.com/terms.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.4</priority>
-  </url>
+<url>
+<loc>https://convertios.com/contact.html</loc>
+</url>
 
 </urlset>
