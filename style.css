@@ -595,3 +595,6 @@ footer{
 }
 
 }
+.logo img{
+    max-width: 150px;
+}
