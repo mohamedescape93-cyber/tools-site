@@ -59,8 +59,8 @@ color:inherit;
 
 /* SEARCH (RIGHT) */
 .search-box{
-    flex: 0 0 200px; /* 🔥 ثابت */
-    position:relative;
+    width:220px;
+    max-width:220px;
 }
 .search-box input{
     width:100%;
@@ -70,6 +70,8 @@ color:inherit;
     border:none;
     background:#0c2547;
     color:white;
+    border:1px solid #1e3a5f;
+
 }
 
 .search-icon{
