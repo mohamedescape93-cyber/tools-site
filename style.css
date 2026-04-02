@@ -103,18 +103,23 @@ padding:0 20px;
 }
 
 .tool-card{
-display:block;
-background:white;
-padding:25px;
-border-radius:12px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
-transition:0.25s;
+    background:#ffffff;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    min-height:130px;
+
+    border:1px solid #e2e8f0;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+
+    transition: all 0.2s ease;
 }
 
+/* Hover effect */
 .tool-card:hover{
-transform:translateY(-5px);
-box-shadow:0 12px 25px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+    border-color:#2563eb;
 }
 /* ===============================
 TOOL PAGE CONTAINER
