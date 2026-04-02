@@ -8,105 +8,31 @@
 
 <title>Link Shortener Online - Shorten URLs Instantly | Convertios</title>
 
-<meta name="description" content="Shorten long URLs instantly with Convertios. Create clean, shareable links for social media, marketing, and messaging. Fast, free, and secure.">
-<link rel="canonical" href="https://convertios.com/link-shortener.html">
-
-<meta name="keywords" content="link shortener, shorten url, url shortener online, short links generator, tinyurl alternative">
-<meta name="robots" content="index, follow">
-
 <link rel="stylesheet" href="style.css">
-
 <link rel="icon" type="image/png" href="favicon.png">
-
-<style>
-
-.tool-container{
-max-width:700px;
-margin:80px auto 30px;
-background:#071a33;
-color:white;
-padding:40px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.3);
-}
-
-#url{
-width:100%;
-padding:14px;
-border:none;
-border-radius:10px;
-margin-top:15px;
-background:#0c2547;
-color:white;
-font-size:15px;
-outline:none;
-}
-
-#shortenBtn{
-margin-top:15px;
-padding:12px 24px;
-background:#3a78ff;
-color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-
-#shortenBtn:hover{
-background:#2a66e6;
-}
-
-.result-box{
-display:flex;
-gap:10px;
-margin-top:20px;
-}
-
-#result{
-flex:1;
-padding:14px;
-border:none;
-border-radius:10px;
-background:#0c2547;
-color:white;
-}
-
-#copyBtn{
-padding:14px 18px;
-cursor:pointer;
-background:#1e40af;
-color:white;
-border:none;
-border-radius:10px;
-}
-
-#toast{
-visibility:hidden;
-background:#111;
-color:#fff;
-padding:12px;
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
-border-radius:8px;
-}
-
-#toast.show{
-visibility:visible;
-}
-
-</style>
 
 </head>
 
 <body>
 
+<header class="site-header">
+
+<a href="index.html" class="logo">
+<img src="convertios-logo.png" alt="Convertios">
+</a>
+
+<nav class="nav-menu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">Tools</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
 <div class="tool-container">
 
 <h1>Link Shortener Online</h1>
-
 <p>Turn long URLs into clean, short links instantly.</p>
 
 <input type="text" id="url" placeholder="Paste your long URL here...">
@@ -123,7 +49,34 @@ visibility:visible;
 
 </div>
 
-<div id="toast">Copied!</div>
+<!-- MORE TOOLS -->
+
+<div class="more-tools">
+
+<h3>Explore More Tools</h3>
+
+<div class="more-tools-grid">
+
+<a href="image-converter.html">Image Converter</a>
+<a href="compress-image.html">Image Compressor</a>
+<a href="jpg-to-pdf.html">JPG to PDF</a>
+<a href="mp3-cutter.html">MP3 Cutter</a>
+
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<p>
+© 2026 Convertios • Free Online Tools
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
+<a href="contact.html">Contact</a>
+</p>
+
+</footer>
 
 <script>
 
@@ -160,21 +113,11 @@ while(attempts < 3 && !success){
 try{
 
 let response = await fetch("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(url));
-
 let shortUrl = await response.text();
 
 if(shortUrl && shortUrl.startsWith("http")){
-
-// extra validation (prevent broken links)
-let test = await fetch(shortUrl, { method: "HEAD" });
-
-if(test.ok){
 result.value = shortUrl;
 success = true;
-}else{
-throw new Error();
-}
-
 }else{
 throw new Error();
 }
@@ -186,7 +129,7 @@ attempts++;
 }
 
 if(!success){
-alert("Failed to generate a working link. Please try again.");
+alert("Failed to generate link. Try again.");
 }
 
 button.innerText = "Shorten Link";
@@ -201,16 +144,7 @@ let result = document.getElementById("result");
 if(!result.value) return;
 
 navigator.clipboard.writeText(result.value);
-showToast();
-
-}
-
-function showToast(){
-
-let toast = document.getElementById("toast");
-toast.className = "show";
-
-setTimeout(()=>toast.className="",2000);
+alert("Copied!");
 
 }
 
