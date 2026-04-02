@@ -59,7 +59,7 @@ color:inherit;
 
 /* SEARCH (RIGHT) */
 .search-box{
-    flex: 0 0 260px; /* 🔥 ثابت */
+    flex: 0 0 200px; /* 🔥 ثابت */
     position:relative;
 }
 .search-box input{
