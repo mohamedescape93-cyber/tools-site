@@ -35,10 +35,12 @@ color:inherit;
     flex: 0 0 auto;
 }
 .logo img{
+    width:200px;
     height:45px;
-    width:auto;
+    object-fit:contain;
     display:block;
 }
+
 /* NAV (CENTER) */
 .nav-menu{
     display:flex;
@@ -307,6 +309,9 @@ color:#3a78ff;
 /* ===============================
 MOBILE (FINAL CLEAN)
 ================================*/
+.hero{
+    min-height:120px;
+}
 .hero-section{
     width: 100%;
     background: #e5e7eb; /* your gray background */
@@ -337,9 +342,8 @@ MOBILE (FINAL CLEAN)
 
 /* HEADER */
 .site-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    height:65px;
+    min-height:65px;
 }
 
 /* LOGO */
@@ -400,7 +404,7 @@ gap:15px;
 
 /* CARDS */
 .tool-card{
-padding:18px;
+    min-height:120px;
 }
 
 /* CONTAINER */
