@@ -65,9 +65,25 @@ color:inherit;
     background:#0a1f3a;
     border-radius:25px;
     padding:8px 15px;
-    height:40px;        /* 🔥 مهم */
-    min-width:260px;    /* 🔥 مهم */
-    
+    height:40px;
+    min-width:260px;
+    position:relative; /* 🔥 مهم */
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    background:transparent;
+    color:white;
+    width:100%;
+    height:100%;
+    font-size:14px;
+}
+
+.search-icon{
+    font-size:14px;
+    margin-right:8px; /* 🔥 بدل absolute */
+}
 .search-box input{
     border:none;
     outline:none;
