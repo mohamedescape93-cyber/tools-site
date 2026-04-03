@@ -264,3 +264,61 @@ MOBILE
     margin:30px 0;
     display:block;
 }
+
+/* ===============================
+MORE TOOLS SECTION
+================================*/
+
+.more-tools{
+    max-width:900px;
+    margin:60px auto;
+    padding:20px;
+}
+
+/* Title */
+.more-tools h3{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+/* GRID */
+.more-tools-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+    gap:15px;
+}
+
+/* CARD */
+.more-tool-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:#ffffff;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+
+    border:1px solid #e2e8f0;
+    transition:0.2s;
+}
+
+/* ICON */
+.more-tool-card span{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+/* TEXT */
+.more-tool-card p{
+    font-size:14px;
+    color:#1e293b;
+}
+
+/* HOVER */
+.more-tool-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+    border-color:#2563eb;
+}
