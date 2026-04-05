@@ -139,30 +139,33 @@ HERO
 /* ===============================
 FLOATING ICONS
 ================================*/
-.hero-icons{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
+.hero-icons {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden; /* 🔥 HARD STOP */
 }
 
-.file-icon{
-    width:60px;
-    height:60px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-weight:bold;
-    position:absolute;
-    opacity:0.9;
+.file-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    opacity: 0.9;
 }
 
-.pdf { background:#ef4444; top:15%; left:10%; }
-.jpg { background:#22c55e; top:60%; left:5%; }
-.png { background:#3b82f6; top:25%; right:10%; }
-.mp3 { background:#a855f7; top:70%; right:15%; }
-.docx { background:#0ea5e9; top:10%; right:25%; }
+/* SAFE POSITIONS (INSIDE SCREEN ONLY) */
+.pdf { background:#ef4444; top:20%; left:8%; }
+.jpg { background:#22c55e; top:65%; left:10%; }
+
+.png { background:#3b82f6; top:30%; left:75%; }
+.mp3 { background:#a855f7; top:70%; left:70%; }
+.docx { background:#0ea5e9; top:10%; left:65%; }
 
 /* ===============================
 CATEGORIES
