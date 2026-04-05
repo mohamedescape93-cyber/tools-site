@@ -24,6 +24,8 @@ HEADER
     padding:15px 40px;
     background:#0f172a;
     box-shadow:0 4px 20px rgba(0,0,0,0.2);
+      position:relative;
+    z-index:1000;
 }
 
 .logo img{
@@ -417,4 +419,7 @@ RESPONSIVE
 .dropdown-menu a:hover{
     background:#334155;
     color:white;
+}
+.dropdown-menu{
+    z-index:2000;
 }
