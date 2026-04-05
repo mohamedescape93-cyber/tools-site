@@ -55,14 +55,15 @@ HEADER (MATCH DESIGN)
     gap:15px;
 }
 .bookmark-btn{
-    background:#e0ecff;
+    background:#2563eb;
+    color:white;
     border:none;
-    padding:6px 12px;
+    padding:6px 14px;
     border-radius:8px;
-    color:#2563eb;
-    cursor:pointer;
 }
-
+.site-header{
+    box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
 .search-box{
     background:#f1f5f9;
     padding:8px 15px;
