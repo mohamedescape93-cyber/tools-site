@@ -384,3 +384,57 @@ RESPONSIVE
     background:radial-gradient(circle, rgba(99,102,241,0.2), transparent);
     filter:blur(40px);
 }
+/* BASE ICON */
+.icon{
+    position:absolute;
+    padding:12px 16px;
+    border-radius:12px;
+    color:white;
+    font-weight:600;
+    font-size:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* SMALL ICONS */
+.icon.small{
+    padding:8px 10px;
+    font-size:11px;
+    opacity:0.8;
+}
+
+/* BACKGROUND ICONS */
+.icon.bg{
+    background:#cbd5e1;
+    color:#94a3b8;
+    font-size:10px;
+    padding:6px 8px;
+    opacity:0.3;
+    box-shadow:none;
+}
+
+/* COLORS */
+.webp{ background:#10b981; }
+.gif{ background:#f59e0b; }
+.wav{ background:#6366f1; }
+.zip{ background:#64748b; }
+
+/* ================= POSITIONS ================= */
+
+/* MAIN */
+.pdf{ top:20%; left:25%; transform:rotate(-8deg); }
+.jpg{ top:65%; left:15%; transform:rotate(6deg); }
+
+.png{ top:10%; right:10%; transform:rotate(10deg); }
+.docx{ top:45%; right:5%; transform:rotate(-6deg); }
+.mp3{ top:70%; right:25%; transform:rotate(-4deg); }
+
+/* SMALL */
+.webp{ top:35%; right:20%; transform:rotate(5deg); }
+.gif{ top:55%; left:30%; transform:rotate(-5deg); }
+.wav{ top:15%; right:30%; transform:rotate(8deg); }
+.zip{ top:75%; right:5%; transform:rotate(-10deg); }
+
+/* BACKGROUND */
+.a{ top:10%; left:10%; }
+.b{ top:50%; left:5%; }
+.c{ top:80%; right:15%; }
