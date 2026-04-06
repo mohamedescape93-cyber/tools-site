@@ -203,8 +203,7 @@ Convert files, edit images, and transform documents instantly with fast and secu
 <a href="tools.html">View All →</a>
 </div>
 
-<div class="tools-grid">
-
+<div class="tools-grid" id="toolsGrid">
 <a href="pdf-to-word.html" class="tool-card">
 <span class="tool-icon">📄</span>
 <h4>PDF to Word</h4>
@@ -345,6 +344,22 @@ searchInput.addEventListener("keypress", function(e) {
             alert("Tool not found yet");
         }
     }
+});
+const searchInput = document.getElementById("toolSearch");
+const tools = document.querySelectorAll(".tool-card");
+
+searchInput.addEventListener("input", function() {
+    const value = this.value.toLowerCase().trim();
+
+    tools.forEach(tool => {
+        const keywords = tool.getAttribute("data-keywords");
+
+        if (keywords.includes(value)) {
+            tool.style.display = "";
+        } else {
+            tool.style.display = "none";
+        }
+    });
 });
 </script>
 </body>
