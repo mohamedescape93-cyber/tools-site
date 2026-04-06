@@ -145,7 +145,7 @@ Convert files, edit images, and transform documents instantly with fast and secu
 </p>
 
 <div class="hero-search">
-<input type="text" placeholder="Search tools (e.g. PDF to Word)">
+<input type="text" id="toolSearch" placeholder="Search tools (e.g. PDF to Word)">
 </div>
 
 </div>
@@ -274,6 +274,7 @@ Convert files, edit images, and transform documents instantly with fast and secu
 <p>© Convertios • Free Tools</p>
 </footer>
 <script>
+    
 document.querySelectorAll(".dropdown span").forEach(item => {
     item.addEventListener("click", function(e){
         e.stopPropagation();
@@ -297,6 +298,56 @@ document.addEventListener("click", () => {
         menu.style.display = "none";
     });
 });
+    <script>
+const searchInput = document.getElementById("toolSearch");
+
+searchInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        let value = searchInput.value.toLowerCase().trim();
+
+        // PDF tools
+        if (value.includes("pdf to word")) {
+            window.location.href = "pdf-to-word.html";
+        } 
+        else if (value.includes("pdf to jpg")) {
+            window.location.href = "pdf-to-jpg.html";
+        }
+        else if (value.includes("jpg to pdf")) {
+            window.location.href = "jpg-to-pdf.html";
+        }
+        else if (value.includes("merge pdf")) {
+            window.location.href = "merge-pdf.html";
+        }
+        else if (value.includes("split pdf")) {
+            window.location.href = "split-pdf.html";
+        }
+
+        // Image tools
+        else if (value.includes("png to jpg")) {
+            window.location.href = "png-to-jpg.html";
+        }
+        else if (value.includes("jpg to png")) {
+            window.location.href = "jpg-to-png.html";
+        }
+        else if (value.includes("compress image")) {
+            window.location.href = "compress-image.html";
+        }
+
+        // Audio tools
+        else if (value.includes("mp3 cutter")) {
+            window.location.href = "mp3-cutter.html";
+        }
+        else if (value.includes("audio converter")) {
+            window.location.href = "audio-converter.html";
+        }
+
+        // fallback
+        else {
+            alert("Tool not found yet");
+        }
+    }
+});
+</script>
 </script>
 </body>
 </html>
