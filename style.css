@@ -348,9 +348,13 @@ TOOLS
 }
 
 /* hover lift */
-.tool-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+.tool-card {
+    padding: 20px;
+    border-radius: 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s;
+    text-decoration: none;
 }
 
 /* icon container */
@@ -362,10 +366,9 @@ TOOLS
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
-    font-size: 24px;
+    font-size: 22px;
+    margin-bottom: 12px;
 }
-
 /* title */
 .tool-card h3 {
     font-size: 17px;
