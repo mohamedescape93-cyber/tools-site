@@ -504,26 +504,99 @@ FOOTER
 /* ===============================
 RESPONSIVE
 =============================== */
-@media(max-width:768px){
+@media (max-width:768px){
 
+/* ===== HEADER ===== */
+.site-header{
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* NAV */
+.nav-menu{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 100%;
+}
+
+/* LINKS */
+.nav-menu a,
+.nav-item span{
+    font-size: 14px;
+    padding: 6px 8px;
+}
+
+/* DROPDOWN */
+.dropdown-menu{
+    position: static;
+    width: 100%;
+}
+
+/* ===== HERO ===== */
 .hero-container{
-    flex-direction:column;
-}
-
-.categories{
-    grid-template-columns:1fr;
-}
-
-.trust-section{
-    grid-template-columns:1fr;
+    flex-direction: column;
+    text-align: center;
 }
 
 .hero-left h1{
-    font-size:28px;
+    font-size: 24px;
 }
 
 .hero-search input{
-    width:100%;
+    width: 100%;
+}
+
+/* ===== CATEGORIES ===== */
+.categories{
+    grid-template-columns: 1fr;
+}
+
+/* ===== TOOLS GRID ===== */
+.tools-grid{
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* ===== TOOL CARD ===== */
+.tool-card{
+    padding: 16px;
+}
+
+/* ===== POPULAR SECTION ===== */
+.popular-section h2{
+    font-size: 22px;
+}
+
+.popular-grid .tool-card:first-child{
+    transform: none; 
+}
+
+/* ===== MORE TOOLS ===== */
+.more-tools-grid{
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== SEO SECTION ===== */
+.seo-section{
+    padding: 0 15px;
+}
+
+.seo-section h2{
+    font-size: 22px;
+}
+
+.seo-section h3{
+    font-size: 18px;
+}
+
+/* ===== FOOTER ===== */
+.footer-container{
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
 }
 
 }
