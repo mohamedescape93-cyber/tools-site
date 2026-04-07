@@ -579,15 +579,15 @@ RESPONSIVE
     align-items: center;
 }
 .hero-badges {
+    position: static !important;
     display: flex;
-    flex-wrap: wrap; /* 👈 هذا أهم سطر */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
 }
-.hero-badge{
-    font-size: 11px;
-    padding: 5px 8px;
-    
+.hero-badge {
+    position: static !important;
+    transform: none !important;
 }
 
 }
