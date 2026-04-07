@@ -578,21 +578,37 @@ RESPONSIVE
     flex-direction: column;
     align-items: center;
 }
+
+/* FORCE RESET EVERYTHING */
+.hero-badges,
+.hero-badges * {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+}
+
+/* CLEAN LAYOUT */
 .hero-badges{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:6px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
 }
 
+/* BADGE STYLE */
 .hero-badge{
-    position:static !important;
-    transform:none !important;
-    font-size:12px;
-    padding:6px 10px;
+    display: inline-flex;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 10px;
 }
 
-}
+
 /* ===== SEO SECTION ===== */
 .seo-section{
     padding: 0 15px;
