@@ -66,7 +66,6 @@ HEADER
     gap:30px;
     justify-self:center;
     width:100%;       
-    max-width:800px;  
     margin:0 auto;    
 
   position: relative;
@@ -385,14 +384,7 @@ TOOLS
 }
 
 /* hover lift */
-.tool-card {
-    padding: 20px;
-    border-radius: 16px;
-    background: white;
-    border: 1px solid #e5e7eb;
-    transition: 0.3s;
-    text-decoration: none;
-}
+
 
 /* icon container */
 .tool-icon-wrap {
@@ -539,7 +531,6 @@ RESPONSIVE
     flex-direction: column;
     text-align: center;
 }
-@media (max-width:768px){
 
 /* ===== HEADER ===== */
 .site-header{
@@ -569,9 +560,7 @@ RESPONSIVE
 }
 
 /* 🔥 IMPORTANT FIX */
-.hero-right{
-    display: none !important;
-}
+
 
 /* TEXT */
 .hero-left h1{
@@ -598,7 +587,7 @@ RESPONSIVE
     grid-template-columns: 1fr;
 }
 
-}
+
 .hero-left h1{
     font-size: 24px;
 }
@@ -660,7 +649,7 @@ RESPONSIVE
     padding: 6px 10px;
 }
 
-}
+
 
 /* ===== SEO SECTION ===== */
 .seo-section{
