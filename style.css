@@ -427,11 +427,54 @@ TRUST
 FOOTER
 =============================== */
 .site-footer {
-    background: #0b1220;
-    opacity: 0.95;
-    padding: 30px;
-    text-align: center;
+    background: linear-gradient(135deg, #0b1220, #111827);
+    padding: 40px 50px 20px;
     color: #9ca3af;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-left h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.footer-left p {
+    font-size: 14px;
+    max-width: 250px;
+}
+
+.footer-links,
+.footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links a,
+.footer-legal a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.footer-links a:hover,
+.footer-legal a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 13px;
+    opacity: 0.7;
 }
 
 /* ===============================
