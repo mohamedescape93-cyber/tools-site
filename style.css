@@ -579,31 +579,25 @@ RESPONSIVE
     align-items: center;
 }
 
-/* FORCE RESET EVERYTHING */
-.hero-badges{
-    display: block !important;
-    text-align: center;
-}
 
-/* each badge becomes its own row */
-.hero-badge{
-    display: inline-block !important;
-    position: static !important;
-    transform: none !important;
-    margin: 4px;
-    padding: 6px 10px;
-    font-size: 12px;
-}
-
-}
 
 /* BADGE STYLE */
+
 .hero-right{
-    display: none !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.icon{
+    position: static !important;
+    transform: none !important;
+    font-size: 12px;
+    padding: 6px 10px;
 }
 
 }
-
 
 /* ===== SEO SECTION ===== */
 .seo-section{
