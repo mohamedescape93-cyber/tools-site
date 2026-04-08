@@ -1218,3 +1218,26 @@ RESPONSIVE
 .nav-icon svg:hover{
     color: white;
 }
+.faq-link-block{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-decoration: none;
+}
+.faq-icon{
+    width: 22px;
+    height: 22px;
+    color: #9ca3af;
+    transition: 0.3s;
+}
+.faq-text{
+    font-size: 10px;
+    margin-top: 3px;
+    color: #9ca3af;
+}
+
+/* hover */
+.faq-link-block:hover .faq-icon,
+.faq-link-block:hover .faq-text{
+    color: white;
+}
