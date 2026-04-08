@@ -450,6 +450,18 @@ CATEGORIES
 .categories-header p{
     color:#6b7280;
 }
+
+@media (max-width: 900px) {
+    .categories-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+}
 /* ===============================
 TOOLS
 =============================== */
