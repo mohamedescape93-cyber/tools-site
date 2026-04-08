@@ -764,6 +764,15 @@ RESPONSIVE
     text-align: center;
     gap: 15px;
 }
+.category-card{
+    flex-direction: column;
+    text-align: center;
+}
+
+.category-icon{
+    margin-bottom: 10px;
+}
+
 
 }
 
