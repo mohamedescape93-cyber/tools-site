@@ -673,9 +673,14 @@ RESPONSIVE
     text-align: center;
 }
 
-/* 🔥 PERFORMANCE FIX */
+.hero{
+    padding: 60px 20px;
+    min-height: auto;
+        min-height: 280px;
+}
+
 .hero-right{
-    display: none !important;
+    display: none !important; /* 🔥 هذا أهم سطر */
 }
 
 /* ===== HERO TEXT ===== */
@@ -685,7 +690,8 @@ RESPONSIVE
 
 /* ===== SEARCH ===== */
 .hero-search input{
-    width: 100%;
+    width:100%;
+    max-width:400px;
 }
 
 /* ===== CATEGORIES ===== */
