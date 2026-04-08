@@ -1133,9 +1133,13 @@ RESPONSIVE
     text-align: left;
 }
 
-.security-icon{
-    width: 50px;
-    min-width: 50px;
+.security-item{
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 12px;
+    transition: 0.3s;
 }
 
 .security-icon svg{
@@ -1144,14 +1148,18 @@ RESPONSIVE
 }
 
 .security-item h3{
-    margin-bottom: 5px;
+    margin-bottom: 6px;
+    font-size: 18px;
 }
 
 .security-item p{
-    color: #6b7280;
     font-size: 14px;
+    line-height: 1.6;
+    color: #6b7280;
 }
-
+.security-item:hover{
+    background: rgba(255,255,255,0.05);
+}
 /* MOBILE */
 @media (max-width:768px){
     .security-grid{
